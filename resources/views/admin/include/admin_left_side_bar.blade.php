@@ -58,11 +58,11 @@
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="#">See All Category</a>
+                            <a href="{{url('admin/category/all')}}">See All Category</a>
                         </li>
 
                         <li>
-                            <a href="#">Add a new category</a>
+                            <a href="{{url('admin/category/add-new')}}">Add a new category</a>
                         </li>
 
                     </ul>
