@@ -34,8 +34,27 @@ class Category extends BaseModel
             array_push($this->errorManager->errorObj, $errorObj);
             return false;
         }
+        if($this->isDuplicateCategoryName($category_name)){
+                $errorObj = new ErrorObj();
+                $errorObj->params = "category_name";
+                $errorObj->msg = "*Duplicate Category Name found !";
+                array_push($this->errorManager->errorObj,$errorObj);
+                return false;
+            }
         $this->category_name = $this->getObj();
         return true;
+    }
+    
+    /**
+     * @ Check Unique $email
+     */
+    public function isDuplicateCategoryName($category_name){
+        $data=$this::where('category_name',$category_name)->where('status','!=','Deleted')->first();
+        if(count($data)>0){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
     }
     
     /**
