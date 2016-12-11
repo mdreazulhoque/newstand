@@ -76,7 +76,7 @@ class LoginUser extends BaseModel
             array_push($this->errorManager->errorObj,$errorObj);
             return false;  
          }
-        /*if($constrains){
+        if($constrains){
             if($this->isDuplicateEmail($email)){
                 $errorObj = new ErrorObj();
                 $errorObj->params = "email";
@@ -84,7 +84,7 @@ class LoginUser extends BaseModel
                 array_push($this->errorManager->errorObj,$errorObj);
                 return false;
             }
-        }*/
+        }
 
 
         $this->email = $this->getObj();

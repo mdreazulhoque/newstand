@@ -35,7 +35,7 @@ class LoginController extends BaseNewsController{
         }
 
         $loginUserModel = new LoginUser();
-        $loginUserModel->setEmail($request->input("email"));
+        $loginUserModel->setEmail($request->input("email"),false);
 
         $loginUserObj = $loginUserModel->getLoginUserByEmail();
 
@@ -47,9 +47,18 @@ class LoginController extends BaseNewsController{
         }
 
         if($loginUserObj->status!="Active"){
-            $this->serviceResponse->responseStat->status = false;
-            $this->serviceResponse->responseStat->msg = "Sorry your email is not verified";
-            return $this->response();
+
+            if($loginUserObj->status=="Pending"){
+                $this->serviceResponse->responseStat->status = false;
+                $this->serviceResponse->responseStat->msg = "Sorry your email is not verified";
+                return $this->response();
+            }
+            
+            if($loginUserObj->status=="Banned"){
+                $this->serviceResponse->responseStat->status = false;
+                $this->serviceResponse->responseStat->msg = "Sorry your email is Banned";
+                return $this->response();
+            }
         }
 
         $auth = new AuthController();
