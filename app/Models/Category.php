@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Tomal
@@ -8,22 +9,19 @@
 
 namespace App\Models;
 
+class Category extends BaseModel {
 
-class Category extends BaseModel
-{
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'categories';
-    
-    
 
     /**
      * @param mixed $category_name
      */
-    public function setCategoryName($category_name) {
+    public function setCategoryName($category_name, $constrains = true) {
         $this->setObj($category_name);
         if (!$this->basicValidation()) {
             $errorObj = new ErrorObj();
@@ -34,58 +32,57 @@ class Category extends BaseModel
             array_push($this->errorManager->errorObj, $errorObj);
             return false;
         }
-        if($this->isDuplicateCategoryName($category_name)){
+        if ($constrains) {
+            if ($this->isDuplicateCategoryName($category_name)) {
                 $errorObj = new ErrorObj();
                 $errorObj->params = "category_name";
                 $errorObj->msg = "*Duplicate Category Name found !";
-                array_push($this->errorManager->errorObj,$errorObj);
+                array_push($this->errorManager->errorObj, $errorObj);
                 return false;
             }
+        }
         $this->category_name = $this->getObj();
         return true;
     }
-    
+
     /**
      * @ Check Unique $email
      */
-    public function isDuplicateCategoryName($category_name){
-        $data=$this::where('category_name',$category_name)->where('status','!=','Deleted')->first();
-        if(count($data)>0){
-           return TRUE;
-        }else{
-           return FALSE;
+    public function isDuplicateCategoryName($category_name) {
+        $data = $this::where('category_name', $category_name)->where('status', '!=', 'Deleted')->first();
+        if (count($data) > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
         }
     }
-    
+
     /**
      * @param mixed $status
      */
-    public function setStatus($status) {        
+    public function setStatus($status) {
         $this->status = $status;
         return true;
     }
-    
 
-    
     /**
      * @param mixed $created_by
      */
     public function setCreatedBy($created_by) {
-         $this->setObj($created_by);
+        $this->setObj($created_by);
 
-        if(!$this->basicValidation())
-        {
+        if (!$this->basicValidation()) {
             $errorObj = new ErrorObj();
             $errorObj->params = "created_by";
             $errorObj->msg = "*Created By is empty";
-            array_push($this->errorManager->errorObj,$errorObj);
+            array_push($this->errorManager->errorObj, $errorObj);
             return false;
         }
 
         $this->created_by = $this->getObj();
         return true;
     }
-    
+
     /**
      * @param mixed $updated_by
      */
@@ -93,26 +90,23 @@ class Category extends BaseModel
         $this->updated_by = $updated_by;
         return true;
     }
-    
-    
-    public function insertCategory(){
-        
+
+    public function insertCategory() {
+
         return $this->save();
     }
-    
-    public function getAllCategories(){
-        $users=$this->All();
 
-        if ($users==null)
+    public function getAllCategories() {
+        $users = $this->All();
+
+        if ($users == null)
             return null;
 
         return $users;
     }
-    
-    
-    
-    public function getCategoryById(){
+
+    public function getCategoryById() {
         return $this::find($this->id);
     }
-    
+
 }

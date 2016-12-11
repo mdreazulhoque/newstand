@@ -17,7 +17,24 @@ class News extends BaseModel {
      * @var string
      */
     protected $table = 'news';
+    
+    /**
+     * @param mixed $category_id
+     */
+    public function setUserId($category_id) {
+        $this->setObj($category_id);
+        if (!$this->basicValidation()) {
+            $errorObj = new ErrorObj();
 
+            $errorObj->params = "category_id";
+            $errorObj->msg = "category id is empty";
+
+            array_push($this->errorManager->errorObj, $errorObj);
+            return false;
+        }
+        $this->category_id = $this->getObj();
+        return true;
+    }
     /**
      * @param mixed $news_title
      */
