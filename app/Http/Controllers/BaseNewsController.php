@@ -29,12 +29,12 @@ class BaseNewsController extends Controller{
         $this->pageData['baseUrl'] ="http://localhost/";       
         
         $this->serviceResponse = new ServiceResponse();
-        $this->appCredential = $this->getSession();
+       /* $this->appCredential = $this->getSession();
 
         $this->serviceResponse->responseStat->isLogin = ($this->appCredential->id>0)?true:false;
         $this->pageData['isLogin'] = $this->serviceResponse->responseStat->isLogin;
 
-        $this->pageData["appCredential"] = $this->appCredential;
+        $this->pageData["appCredential"] = $this->appCredential;*/
 
         
 
