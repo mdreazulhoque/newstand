@@ -18,7 +18,7 @@ class CreateEmailVarificationsTable extends Migration
             $table->string('verification_link');
             $table->dateTime('expire_date');
             $table->enum('status',['Incompleted','Completed'])->default('Incompleted');
-            $table->integer('creatd_by');
+            $table->integer('created_by');
             $table->integer('updated_by')->nullable()->default(0);
             $table->timestamps();
         });
