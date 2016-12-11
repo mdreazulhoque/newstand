@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('category_name',100);
             $table->enum('status',['Active','Deleted'])->default('Active');
-            $table->integer('creatd_by');
+            $table->integer('created_by');
             $table->integer('updated_by')->nullable()->default(0);
             $table->timestamps();
         });
