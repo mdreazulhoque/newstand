@@ -13,9 +13,9 @@ class CreateEmailVarificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('email_varifications', function (Blueprint $table) {
+        Schema::create('email_verifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('varification_link');
+            $table->string('verification_link');
             $table->dateTime('expire_date');
             $table->enum('status',['Incompleted','Completed'])->default('Incompleted');
             $table->integer('creatd_by');
@@ -31,6 +31,6 @@ class CreateEmailVarificationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('email_varifications');
+        Schema::drop('email_verifications');
     }
 }

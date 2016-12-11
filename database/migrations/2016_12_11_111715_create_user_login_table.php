@@ -15,6 +15,7 @@ class CreateUserLoginTable extends Migration
     {
         Schema::create('login_users', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('role',['User','Admin'])->default('User');
             $table->integer('user_id');  
             $table->string('email',30)->unique();
             $table->string('password');
