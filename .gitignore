@@ -2,5 +2,7 @@
 /node_modules
 /public/storage
 Homestead.yaml
+.idea/
 Homestead.json
 .env
+composer.lock
