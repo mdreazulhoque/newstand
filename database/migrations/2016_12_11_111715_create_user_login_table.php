@@ -21,7 +21,7 @@ class CreateUserLoginTable extends Migration
             $table->string('password');
             $table->enum('status',['Active','Pending','Deleted','Banned'])->default('Pending');
             $table->rememberToken();
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable()->default(0);
             $table->integer('updated_by')->nullable()->default(0);
             $table->timestamps();
         });

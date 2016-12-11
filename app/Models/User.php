@@ -158,18 +158,8 @@ class User extends BaseModel
      * @param mixed $created_by
      */
     public function setCreatedBy($created_by) {
-         $this->setObj($created_by);
-
-        if(!$this->basicValidation())
-        {
-            $errorObj = new ErrorObj();
-            $errorObj->params = "created_by";
-            $errorObj->msg = "*Created By is empty";
-            array_push($this->errorManager->errorObj,$errorObj);
-            return false;
-        }
-
-        $this->created_by = $this->getObj();
+        
+        $this->created_by = $created_by;
         return true;
     }
     

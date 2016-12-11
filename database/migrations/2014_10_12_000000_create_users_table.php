@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email',30)->unique();
             $table->date('dob');
             $table->string('address');
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable()->default(0);
             $table->integer('updated_by')->nullable()->default(0);
             $table->timestamps();
         });
