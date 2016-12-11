@@ -17,7 +17,7 @@
             @yield('content')
 
 
-            @include('user.include.admin_right_nav')
+            @include('user.include.user_right_nav')
         </div>
     </div>
 

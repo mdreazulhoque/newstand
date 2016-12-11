@@ -19,6 +19,23 @@ class LoginUser extends BaseModel
     protected $table = 'login_users';
     protected $hidden = array('password','remember_token');
     /**
+     * @param mixed $role
+     */
+    public function setRole($role) {        
+        $this->setObj($role);
+        if (!$this->basicValidation()) {
+            $errorObj = new ErrorObj();
+
+            $errorObj->params = "role";
+            $errorObj->msg = "Role is empty";
+
+            array_push($this->errorManager->errorObj, $errorObj);
+            return false;
+        }
+        $this->role = $this->getObj();
+        return true;
+    }
+    /**
      * @param mixed $user_id
      */
     public function setUserId($user_id) {        
@@ -117,7 +134,7 @@ class LoginUser extends BaseModel
             return false;
         }
 
-        $this->creatd_by = $this->getObj();
+        $this->created_by = $this->getObj();
         return true;
     }
     

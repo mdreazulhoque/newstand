@@ -63,7 +63,7 @@ class Category extends BaseModel
             return false;
         }
 
-        $this->creatd_by = $this->getObj();
+        $this->created_by = $this->getObj();
         return true;
     }
     

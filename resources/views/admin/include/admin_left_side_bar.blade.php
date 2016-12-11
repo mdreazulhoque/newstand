@@ -51,7 +51,22 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">note_add</i>
+                        <span>Category</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="#">See All Category</a>
+                        </li>
 
+                        <li>
+                            <a href="#">Add a new category</a>
+                        </li>
+
+                    </ul>
+                </li>
 
 
 
