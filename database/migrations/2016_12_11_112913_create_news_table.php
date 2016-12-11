@@ -19,7 +19,6 @@ class CreateNewsTable extends Migration
             $table->string('news_slug')->unique();
             $table->string('photo_url');
             $table->text('news_content');
-            $table->timestamp('expiredate');
             $table->enum('status',['Publish','Unpublished','Pending','Deleted'])->default('Pending');
             $table->integer('creatd_by');
             $table->integer('updated_by')->nullable()->default(0);

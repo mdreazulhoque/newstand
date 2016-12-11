@@ -16,7 +16,7 @@ class CreateEmailVarificationsTable extends Migration
         Schema::create('email_varifications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('varification_link');
-            $table->timestamp('expiredate');
+            $table->dateTime('expire_date');
             $table->enum('status',['Incompleted','Completed'])->default('Incompleted');
             $table->integer('creatd_by');
             $table->integer('updated_by')->nullable()->default(0);
