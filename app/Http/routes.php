@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('test','TestController@index');
+
+Route::get('admin/home','Web\Admin\AdminHomeController@index');
+
+Route::get('/home','Web\AppUser\UserHomeController@index');
