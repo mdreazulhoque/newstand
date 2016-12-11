@@ -17,22 +17,40 @@ class EmailVerification extends BaseModel
      * @var string
      */
     protected $table = 'email_verifications';
-    
+
     /**
-     * @param mixed $verification_link
+     * @param mixed $login_user_id
      */
-    public function setVerificationLink($verification_link) {        
-        $this->setObj($verification_link);
+    public function setLoginUserId($login_user_id) {
+        $this->setObj($login_user_id);
         if (!$this->basicValidation()) {
             $errorObj = new ErrorObj();
 
-            $errorObj->params = "verification_link";
-            $errorObj->msg = "varification link is empty";
+            $errorObj->params = "login user_id";
+            $errorObj->msg = "Login User id is empty";
 
             array_push($this->errorManager->errorObj, $errorObj);
             return false;
         }
-        $this->verification_link = $this->getObj();
+        $this->login_user_id = $this->getObj();
+        return true;
+    }
+    
+    /**
+     * @param mixed $verification_link
+     */
+    public function setToken($token) {
+        $this->setObj($token);
+        if (!$this->basicValidation()) {
+            $errorObj = new ErrorObj();
+
+            $errorObj->params = "token";
+            $errorObj->msg = "token is empty";
+
+            array_push($this->errorManager->errorObj, $errorObj);
+            return false;
+        }
+        $this->token = $this->getObj();
         return true;
     }
 
@@ -92,9 +110,17 @@ class EmailVerification extends BaseModel
     }
     
     
-    public function insertEmailVerification(){
+    public function saveEmailVerification(){
         
         return $this->save();
+    }
+
+    public function updateEmailVerification($emailVerificationObj){
+
+        if($emailVerificationObj->save()){
+            return true;
+        }
+        return false;
     }
     
     public function getAllEmailVerifications(){
@@ -106,7 +132,14 @@ class EmailVerification extends BaseModel
         return $users;
     }
     
-    
+    public function getByToken(){
+
+        $emailVerificationObj = $this->where("token",$this->token)->first();
+
+        return $emailVerificationObj;
+
+
+    }
     
     public function getEmailVerificationById(){
         return $this::find($this->id);

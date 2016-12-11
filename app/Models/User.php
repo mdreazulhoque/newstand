@@ -52,7 +52,7 @@ class User extends BaseModel
             array_push($this->errorManager->errorObj, $errorObj);
             return false;
         }
-        $this->first_name = $this->getObj();
+        $this->last_name = $this->getObj();
         return true;
     }
     
@@ -193,7 +193,7 @@ class User extends BaseModel
         }
     }
 
-    public function insertUser(){
+    public function saveUser(){
         
         return $this->save();
     }

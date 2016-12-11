@@ -16,3 +16,21 @@ Route::get('/', function () {
 });
 
 Route::get('test','TestController@index');
+
+Route::post('user/register','SignUpController@registerUser');
+
+Route::post('email/verify/{id}','EmailVerificationController@verifyEmail');
+
+Route::post('/login', 'LoginController@loginAttempt');
+
+
+
+Route::group(['middleware' => 'AuthFilter'], function () {
+
+    Route::post('/logout', 'LoginController@logout');
+
+    Route::group(['middleware' => 'AdminRole'], function () {
+
+        Route::post('admin/register','SignUpController@registerAdmin');
+    });
+});

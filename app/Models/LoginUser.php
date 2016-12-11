@@ -38,7 +38,7 @@ class LoginUser extends BaseModel
     /**
      * @param mixed $user_id
      */
-    public function setUserId($user_id) {        
+    public function setUserId($user_id) {
         $this->setObj($user_id);
         if (!$this->basicValidation()) {
             $errorObj = new ErrorObj();
@@ -76,7 +76,7 @@ class LoginUser extends BaseModel
             array_push($this->errorManager->errorObj,$errorObj);
             return false;  
          }
-        if($constrains){
+        /*if($constrains){
             if($this->isDuplicateEmail($email)){
                 $errorObj = new ErrorObj();
                 $errorObj->params = "email";
@@ -84,7 +84,7 @@ class LoginUser extends BaseModel
                 array_push($this->errorManager->errorObj,$errorObj);
                 return false;
             }
-        }
+        }*/
 
 
         $this->email = $this->getObj();
@@ -139,13 +139,22 @@ class LoginUser extends BaseModel
     }
     
     /**
+     * @param mixed $remember_token
+     */
+    public function setRememberToken($remember_token) {
+        $this->remember_token = $remember_token;
+        return true;
+    }
+
+    /**
      * @param mixed $updated_by
      */
     public function setUpdatedBy($updated_by) {
         $this->updated_by = $updated_by;
         return true;
     }
-    
+
+
     /**
      * @ Check Unique $email
      */
@@ -158,9 +167,17 @@ class LoginUser extends BaseModel
         }
     }
     
-    public function insertLoginUser(){
+    public function saveLoginUser(){
         
         return $this->save();
+    }
+
+    public function updateLoginUser($userLoginObj){
+
+        if($userLoginObj->save()){
+            return true;
+        }
+        return false;
     }
     
     public function getAllLoginUsers(){
@@ -173,9 +190,17 @@ class LoginUser extends BaseModel
     }
     
     
-    
     public function getLoginUserById(){
-        return $this::find($this->id);
+        return $this::where('id',$this->id)->with("user_detail")->first();
     }
-    
+
+    public function getLoginUserByEmail(){
+
+        return $this::where('email',$this->email)->first();
+    }
+
+    public function user_detail()
+    {
+        return $this->hasOne("App\Models\User","id","user_id");
+    }
 }
