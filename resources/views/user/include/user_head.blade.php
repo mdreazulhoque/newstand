@@ -12,6 +12,7 @@
     <link href="{{asset('developer/admin/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
 
     <!-- Theme CSS -->
+    <link href="{{asset('developer/user/css/blog-home.css')}}" rel="stylesheet">
     <link href="{{asset('developer/user/css/clean-blog.min.css')}}" rel="stylesheet">
 
 
