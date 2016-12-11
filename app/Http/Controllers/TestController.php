@@ -12,6 +12,6 @@ namespace App\Http\Controllers;
 class TestController extends BaseNewsController
 {
     public function index(){
-        return view('user.news_details');
+        return view('user.dashboard.dashboard_home');
     }
 }
