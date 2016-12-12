@@ -59,13 +59,30 @@ class SignUpController extends BaseNewsController{
 
                     $emailVerificationModel = new EmailVerification();
                     $emailVerificationModel->setLoginUserId($loginUserModel->id);
-                    $emailVerificationModel->setToken(hash('md5',time()));
+                    $token = hash('md5',time());
+                    $emailVerificationModel->setToken($token);
                     $emailVerificationModel->setExpireDate(date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +1 day')));
                     $emailVerificationModel->setStatus("Incomplete");
 
                     if($emailVerificationModel->saveEmailVerification()){
                         $this->serviceResponse->responseStat->status = true;
                         $this->serviceResponse->responseStat->msg = "Registration successful, Verify email to login !";
+
+                        //Verification Email
+
+                        $to = $request->input("email");
+
+                        $subject = "Verification email !";
+
+                        $pageData['last_name'] = $request->input("last_name");
+                        $pageData['token'] = $token;
+
+                        $message = view('email.verification_mail',$pageData);
+
+                        $emailControllerObj = new EmailController();
+                        $emailControllerObj->sendEmail($to,$subject,$message);
+
+                        
                         $this->serviceResponse->responseData = $loginUserModel->getLoginUserById();
                         return $this->response();
                     }else{
