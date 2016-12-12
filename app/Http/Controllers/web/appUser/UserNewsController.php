@@ -22,16 +22,16 @@ class UserNewsController extends BaseNewsController
 
         $slug="guis4567";
         $newsModel=new News();
-        $newsModel->getNewBySlug($slug);
-
-        
+        if($newsModel->setSlugWhileGet($slug)){
+            $newsModel->getNewBySlug();
+        }
 
     }
     public function getNewByUserIdView(){
         $userID=1;
         $newsModel=new News();
-        $newsModel->setUserId($userID);
-
+        $newsModel->setCurrentUserId($userID);
+        $this->pageData['newsList']=$newsModel->getAllNewsByUserId();
 
     }
 
