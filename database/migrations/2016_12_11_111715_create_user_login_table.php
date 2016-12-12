@@ -18,7 +18,7 @@ class CreateUserLoginTable extends Migration
             $table->enum('role',['User','Admin'])->default('User');
             $table->integer('user_id');  
             $table->string('email',30)->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->enum('status',['Active','Pending','Deleted','Banned'])->default('Pending');
             $table->rememberToken();
             $table->integer('created_by')->nullable()->default(0);

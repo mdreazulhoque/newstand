@@ -161,14 +161,6 @@ class LoginUser extends BaseModel
         
         return $this->save();
     }
-
-    public function updateLoginUser($userLoginObj){
-
-        if($userLoginObj->save()){
-            return true;
-        }
-        return false;
-    }
     
     public function getAllLoginUsers(){
         $users=$this->All();

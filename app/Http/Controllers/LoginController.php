@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends BaseNewsController{
 
+    public function loginView()
+    {
+        return view('user.login');
+    }
+
     /**
      * for login
      * @param  \Illuminate\Http\Request  $request

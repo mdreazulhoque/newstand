@@ -11,19 +11,22 @@ use Illuminate\Support\Facades\Validator;
 
 class SignUpController extends BaseNewsController{
 
+
+    public function registrationView(){
+        return view('user.registration');
+    }
+
     public function registerUser(Request $request){
 
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|max:55',
             'last_name' => 'required|max:55',
             'phone' => 'required|max:15',
-            'dob' => 'required|max:55',
+            'birth_month' => 'required|max:2',
+            'birth_day' => 'required|max:2',
+            'birth_year' => 'required|max:4',
             'address' => 'required|max:150',
             'email' => 'required|email|max:255|unique:login_users',
-            'password' => 'required|max:150',
-            'confirm_password' => 'required|max:150',
-
-
         ]);
         if ($validator->fails()) {
             $this->serviceResponse->responseStat->status = false;
@@ -37,7 +40,8 @@ class SignUpController extends BaseNewsController{
         $userModel->setLastName($request->input("last_name"));
         $userModel->setPhone($request->input("phone"));
         $userModel->setEmail($request->input("email"));
-        $userModel->setDOB($request->input("dob"));
+        $dob = $request->input("birth_year")."-".$request->input("birth_month")."-".$request->input("birth_day");
+        $userModel->setDOB($dob);
         $userModel->setAddress($request->input("address"));
 
         $this->setError($userModel->errorManager->errorObj);
@@ -49,7 +53,6 @@ class SignUpController extends BaseNewsController{
 
                 $loginUserModel->setUserId($userModel->id);
                 $loginUserModel->setEmail($request->input("email"));
-                $loginUserModel->setPassword($request->input("password"));
                 $loginUserModel->setRememberToken(hash('ripemd160',time()));
 
                 if($loginUserModel->saveLoginUser()){
@@ -58,11 +61,11 @@ class SignUpController extends BaseNewsController{
                     $emailVerificationModel->setLoginUserId($loginUserModel->id);
                     $emailVerificationModel->setToken(hash('md5',time()));
                     $emailVerificationModel->setExpireDate(date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +1 day')));
-                    $emailVerificationModel->setStatus("Incompleted");
+                    $emailVerificationModel->setStatus("Incomplete");
 
                     if($emailVerificationModel->saveEmailVerification()){
                         $this->serviceResponse->responseStat->status = true;
-                        $this->serviceResponse->responseStat->msg = "User registration has been successfully completed.";
+                        $this->serviceResponse->responseStat->msg = "Registration successful, Verify email to login !";
                         $this->serviceResponse->responseData = $loginUserModel->getLoginUserById();
                         return $this->response();
                     }else{

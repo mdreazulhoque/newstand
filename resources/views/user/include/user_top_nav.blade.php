@@ -25,7 +25,20 @@
                 <li>
                     <a href="{{ url('/contact') }}">Contact</a>
                 </li>
+                @if(!\Illuminate\Support\Facades\Auth::check())
+                    <li>
+                        <a href="{{\Illuminate\Support\Facades\URL::to('user/login/view')}}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{{\Illuminate\Support\Facades\URL::to('user/register/view')}}">Register</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="">{{@\Illuminate\Support\Facades\Auth::user()->first_name}}</a>
+                    </li>
+                @endif
             </ul>
+            <div> </div>
         </div>
         <!-- /.navbar-collapse -->
     </div>

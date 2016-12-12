@@ -20,15 +20,22 @@ Route::get('test','TestController@index');
 
 Route::post('user/register','SignUpController@registerUser');
 
-Route::post('email/verify/{id}','EmailVerificationController@verifyEmail');
+Route::get('user/register/view','SignUpController@registrationView');
 
-Route::post('/login', 'LoginController@loginAttempt');
+Route::post('user/password/set/{id}','UserController@setPassword');
+
+Route::get('user/password_set/view','UserController@setPasswordView');
+
+Route::get('email/verify/{id}','EmailVerificationController@verifyEmail');
+
+Route::get('user/login/view','LoginController@loginView');
+Route::post('login', 'LoginController@loginAttempt');
 
 
 
 Route::group(['middleware' => 'AuthFilter'], function () {
 
-    Route::post('/logout', 'LoginController@logout');
+    Route::get('/logout', 'LoginController@logout');
 
     Route::group(['middleware' => 'AdminRole'], function () {
 

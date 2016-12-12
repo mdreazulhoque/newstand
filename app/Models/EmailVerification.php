@@ -114,14 +114,6 @@ class EmailVerification extends BaseModel
         
         return $this->save();
     }
-
-    public function updateEmailVerification($emailVerificationObj){
-
-        if($emailVerificationObj->save()){
-            return true;
-        }
-        return false;
-    }
     
     public function getAllEmailVerifications(){
         $users=$this->All();
