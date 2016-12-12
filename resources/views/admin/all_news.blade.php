@@ -8,31 +8,36 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Category List
+                        News
                     </h2>
 
                 </div>
                 <div class="body">
-                    @if($catList->isEmpty())
-                        <h5>Currently There is no news category is enlisted in the system.</h5>
+                    @if($newsList->isEmpty())
+                        <h5>No news was found in the system</h5>
                     @else
 
                         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                             <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>News title</th>
+                                <th>Short Description</th>
+                                <th>Published by</th>
+                                <th>Category</th>
                                 <th>Status</th>
                                 <th>Action</th>
                                 <th>Action</th>
-                                <th>Action</th>
+
 
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Name</th>
+                                <th>News title</th>
+                                <th>Short Description</th>
+                                <th>Published by</th>
+                                <th>Category</th>
                                 <th>Status</th>
-                                <th>Action</th>
                                 <th>Action</th>
                                 <th>Action</th>
 
@@ -41,28 +46,28 @@
                             </tfoot>
                             <tbody>
 
-                            @foreach ($catList as $cat)
+                            @foreach ($newsList as $news)
                                 @if($cat->status!='Deleted')
-                                <tr id="row{{$cat->id}}">
-                                    <td>{{$cat->category_name}}</td>
+                                    <tr id="row{{$news->id}}">
+                                        <td>{{$news->category_name}}</td>
 
-                                    @if($cat->status==='Active')
-                                        <td id="{{$cat->id}}" style="color: green">Active</td>
-                                    @else
-                                        <td id="{{$cat->id}}" style="color: red">Deactivate</td>
-                                    @endif
+                                        @if($cat->status==='Active')
+                                            <td id="{{$cat->id}}" style="color: green">Active</td>
+                                        @else
+                                            <td id="{{$cat->id}}" style="color: red">Deactivate</td>
+                                        @endif
 
-                                    @if($cat->status==='Active')
-                                        <td ><button id="btn{{$cat->id}}"  onclick="activationCategory({{$cat->id}});" type="button" class="btn btn-danger">Deactivate</button></td>
-                                    @else
-                                        <td><button id="btn{{$cat->id}}" onclick="activationCategory({{$cat->id}});" type="button" class="btn btn-success">Activate</button></td>
-                                    @endif
+                                        @if($cat->status==='Active')
+                                            <td ><button id="btn{{$cat->id}}"  onclick="activationCategory({{$cat->id}});" type="button" class="btn btn-danger">Deactivate</button></td>
+                                        @else
+                                            <td><button id="btn{{$cat->id}}" onclick="activationCategory({{$cat->id}});" type="button" class="btn btn-success">Activate</button></td>
+                                        @endif
 
-                                    <td><a class="btn btn-primary" href="{{url('admin/category/edit/view/'.$cat->id)}}" role="button">Edit</a></td>
+                                        <td><a class="btn btn-primary" href="{{url('admin/category/edit/view/'.$cat->id)}}" role="button">Edit</a></td>
 
-                                    <td><button onclick="deleteCategory({{$cat->id}})" type="button" class="btn btn-danger">Delete</button> </td>
+                                        <td><button onclick="deleteCategory({{$cat->id}})" type="button" class="btn btn-danger">Delete</button> </td>
 
-                                </tr>
+                                    </tr>
                                 @endif
                             @endforeach
 
@@ -72,14 +77,14 @@
 
                     @endif
 
-                        <br>
-                        <div class="row clearfix">
-                            <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                <label id="errorMessage" style="color: red"></label>
-                                <label id="alertMsg" style="color: green"></label>
-                            </div>
-
+                    <br>
+                    <div class="row clearfix">
+                        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                            <label id="errorMessage" style="color: red"></label>
+                            <label id="alertMsg" style="color: green"></label>
                         </div>
+
+                    </div>
                 </div>
             </div>
         </div>

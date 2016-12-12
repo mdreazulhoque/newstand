@@ -43,7 +43,7 @@
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="#">See News</a>
+                            <a href="{{url('admin/news/get-all-news')}}">See News</a>
                         </li>
 
 

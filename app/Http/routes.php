@@ -47,6 +47,7 @@ Route::post('admin/category/deactivate/{catId}','Web\Admin\AdminCategoryControll
 Route::post('admin/category/delete/{catId}','Web\Admin\AdminCategoryController@deleteCategory');
 Route::get('admin/category/edit/view/{catId}','Web\Admin\AdminCategoryController@getEditCategoryView');
 Route::post('admin/category/edit','Web\Admin\AdminCategoryController@editCategory');
+Route::get('admin/news/get-all-news','Web\Admin\AdminNewsController@getAllNews');
 
 
 
