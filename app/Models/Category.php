@@ -12,6 +12,15 @@ namespace App\Models;
 class Category extends BaseModel {
 
     /**
+     * The variables are enum values for status column for this table.
+     *
+     * @var string
+     */
+    public $inactive="Inactive";
+    public $active="Active";
+    public $deleted="Deleted";
+
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -91,7 +100,7 @@ class Category extends BaseModel {
         return true;
     }
 
-    public function insertCategory() {
+    public function saveCategory() {
 
         return $this->save();
     }
@@ -107,6 +116,11 @@ class Category extends BaseModel {
 
     public function getCategoryById() {
         return $this::find($this->id);
+    }
+
+    public function updateCategory($data){
+        return $data->save();
+
     }
 
 }

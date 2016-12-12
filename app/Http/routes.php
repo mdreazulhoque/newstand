@@ -42,4 +42,11 @@ Route::get('/home','Web\AppUser\UserHomeController@index');
 Route::get('admin/category/all','Web\Admin\AdminCategoryController@getllCategoryView');
 Route::get('admin/category/add-new','Web\Admin\AdminCategoryController@getAddNewCategoryView');
 Route::post('admin/category/save-new-category','Web\Admin\AdminCategoryController@saveNewCategory');
+Route::post('admin/category/activate/{catId}','Web\Admin\AdminCategoryController@activateCategory');
+Route::post('admin/category/deactivate/{catId}','Web\Admin\AdminCategoryController@deactivateCategory');
+Route::post('admin/category/delete/{catId}','Web\Admin\AdminCategoryController@deleteCategory');
+Route::get('admin/category/edit/view/{catId}','Web\Admin\AdminCategoryController@getEditCategoryView');
+Route::post('admin/category/edit','Web\Admin\AdminCategoryController@editCategory');
+
+
 
