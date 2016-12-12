@@ -43,3 +43,5 @@ Route::get('admin/category/all','Web\Admin\AdminCategoryController@getllCategory
 Route::get('admin/category/add-new','Web\Admin\AdminCategoryController@getAddNewCategoryView');
 Route::post('admin/category/save-new-category','Web\Admin\AdminCategoryController@saveNewCategory');
 
+
+

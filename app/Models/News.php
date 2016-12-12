@@ -67,6 +67,7 @@ class News extends BaseModel {
             array_push($this->errorManager->errorObj, $errorObj);
             return false;
         }
+
         $news_slug1 = str_replace('\\', '', $news_slug);
         $news_slug2 = str_replace('/', '', $news_slug1);
         $news_slug3 = str_slug($news_slug2, "-");
@@ -165,9 +166,14 @@ class News extends BaseModel {
         return $users;
     }
 
+    public function getNewBySlug($slug){
+        return $this::where('news_slug',$slug)->get();
+    }
+
     public function getNewsById() {
         return $this::find($this->id);
     }
+
     public function getAllPublishNews() {
         $allnews = $this::where("status", "Publish")
                         ->limit($this->customLimit)
