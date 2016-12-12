@@ -52,3 +52,5 @@ Route::post('admin/news/delete/{newsId}','Web\Admin\AdminNewsController@deleteNe
 
 
 
+
+
