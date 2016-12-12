@@ -18,6 +18,14 @@ class News extends BaseModel {
      */
     protected $table = 'news';
     
+    public function user()
+    {
+        return $this->hasOne("App\Models\User","id","created_by");
+    }
+    public function category()
+    {
+        return $this->hasOne("App\Models\Category","id","category_id");
+    }
     /**
      * @param mixed $category_id
      */
@@ -175,7 +183,8 @@ class News extends BaseModel {
     }
 
     public function getAllPublishNews() {
-        $allnews = $this::where("status", "Publish")
+        $allnews = $this->with("category", "user")
+                        ->where("status", "Publish")
                         ->limit($this->customLimit)
                         ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('id', 'desc')
