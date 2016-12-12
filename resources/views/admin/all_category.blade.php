@@ -47,9 +47,9 @@
                                     <td>{{$cat->category_name}}</td>
 
                                     @if($cat->status==='Active')
-                                        <td id="{{$cat->id}}" style="color: green">Active</td>
+                                        <td id="status{{$cat->id}}" style="color: green">Active</td>
                                     @else
-                                        <td id="{{$cat->id}}" style="color: red">Deactivate</td>
+                                        <td id="status{{$cat->id}}" style="color: red">Deactivate</td>
                                     @endif
 
                                     @if($cat->status==$cat->active)
@@ -137,8 +137,8 @@
 
 
                         if (operation=='Activate'){
-                            $('#'+catid).text('Activate');
-                            $('#'+catid).css('color','green');
+                            $('#status'+catid).text('Activate');
+                            $('#status'+catid).css('color','green');
                             $('#btn'+catid).text('Deactivate');
                             $('#btn'+catid).removeClass('btn btn-success');
                             $('#btn'+catid).addClass('btn btn-danger');
@@ -146,8 +146,8 @@
 
 
                         }else if(operation=='Deactivate'){
-                            $('#'+catid).text('Deactivate');
-                            $('#'+catid).css('color','red');
+                            $('#status'+catid).text('Deactivate');
+                            $('#status'+catid).css('color','red');
 
                             $('#btn'+catid).text('Activate');
                             $('#btn'+catid).removeClass('btn btn-danger');

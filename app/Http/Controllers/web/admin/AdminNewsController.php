@@ -26,6 +26,69 @@ class AdminNewsController extends BaseNewsController
     }
 
 
+
+    public function publishNews($newsId){
+        if (empty($newsId) || $newsId<1 || !is_numeric($newsId)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "News not found";
+            return $this->response();
+        }
+
+        $newsModel=new News();
+        $newsModel->setId($newsId);
+        $news= $newsModel->getNewsById();
+
+        if (empty($news)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "News not found";
+            return $this->response();
+        }
+
+        $news->setStatus($newsModel->publish);
+
+
+        if ($news->saveNews()){
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "News has been Published to the portal";
+            return $this->response();
+        }else{
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Something went wrong";
+            return $this->response();
+        }
+    }
+
+    public function unpublishNews($newsId){
+        if (empty($newsId) || $newsId<1 || !is_numeric($newsId)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "News not found";
+            return $this->response();
+        }
+
+        $newsModel=new News();
+        $newsModel->setId($newsId);
+        $news= $newsModel->getNewsById();
+
+        if (empty($news)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "News not found";
+            return $this->response();
+        }
+
+        $news->setStatus($newsModel->publish);
+
+
+        if ($news->saveNews()){
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "News has been unpublished from portal";
+            return $this->response();
+        }else{
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Something went wrong";
+            return $this->response();
+        }
+    }
+
     public function deleteNews($newsId){
         if (empty($newsId) || $newsId<1 || !is_numeric($newsId)){
             $this->serviceResponse->responseStat->status = false;
@@ -39,7 +102,7 @@ class AdminNewsController extends BaseNewsController
 
         if (empty($news)){
             $this->serviceResponse->responseStat->status = false;
-            $this->serviceResponse->responseStat->msg = "Category not found";
+            $this->serviceResponse->responseStat->msg = "News not found";
             return $this->response();
         }
 
