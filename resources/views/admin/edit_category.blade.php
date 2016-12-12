@@ -6,13 +6,13 @@
                 <div class="header">
                     <h2>
 
-                        New Category
+                       Edit Category
                     </h2>
 
 
                 </div>
                 <div class="body">
-                    <form role="form" class="form-horizontal" onsubmit="return saveCategory();">
+                    <form role="form" class="form-horizontal" onsubmit="return updateCategory({{$cat->id}});">
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                 <label for="fname">Category Name</label>
@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" id="cat_name" name="cat_name" class="form-control"
-                                               placeholder="Please Enter Category Name">
+                                               value="{{$cat->category_name}}">
                                     </div>
                                 </div>
                             </div>
@@ -30,7 +30,7 @@
 
                         <div class="row clearfix">
                             <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Add New Category
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Update Category
                                 </button>
                             </div>
                         </div>
@@ -52,7 +52,8 @@
 
     <script>
 
-        function saveCategory() {
+        function updateCategory(catid) {
+
 
             var cat_name = $('#cat_name').val();
 
@@ -78,10 +79,11 @@
 
             $.ajax({
                 type: "POST",
-                url: $('#baseUrl').val() + 'admin/category/save-new-category',
+                url: $('#baseUrl').val() + 'admin/category/edit',
                 data: {
 
-                    cat_name: cat_name
+                    cat_name: cat_name,
+                    id:catid
 
                 },
                 success: function (data) {
@@ -94,7 +96,7 @@
 
 
                     } else {
-                        alert(data.responseStat.msg);
+                        $("#errorMessage").html(data.responseStat.msg).fadeIn(500).delay(2000).fadeOut(500);
                     }
 
 
@@ -111,4 +113,4 @@
         }
 
     </script>
-    @endsection
+@endsection

@@ -15,6 +15,9 @@ use App\Models\Category;
 
 class AdminCategoryController extends BaseNewsController
 {
+
+
+
     public function getllCategoryView(){
 
         $catModel=new Category();
@@ -42,7 +45,7 @@ class AdminCategoryController extends BaseNewsController
             $this->serviceResponse->responseStat->msg = "Error in Input";
             return $this->response();
         }else{
-            if ($catModel->insertCategory()){
+            if ($catModel->saveCategory()){
                 $this->serviceResponse->responseStat->status = true;
                 $this->serviceResponse->responseStat->msg = "Category has been added successfully";
                 return $this->response();
@@ -56,6 +59,165 @@ class AdminCategoryController extends BaseNewsController
 
 
     }
+
+    public function editCategory(Request $request){
+        $catName=$request->input('cat_name');
+        $catid=$request->input('id');
+        $catModel=new Category();
+        $catModel->setId($catid);
+        $cat=$catModel->getCategoryById();
+
+
+        $cat->setCategoryName($catName);
+        $this->setError($catModel->errorManager->errorObj);
+
+
+        if ($this->hasError()){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Error in Input";
+            return $this->response();
+        }else{
+            if ($cat->saveCategory()){
+                $this->serviceResponse->responseStat->status = true;
+                $this->serviceResponse->responseStat->msg = "Category has been updated successfully";
+                return $this->response();
+
+            }else{
+                $this->serviceResponse->responseStat->status = false;
+                $this->serviceResponse->responseStat->msg = "Error in saving Category";
+                return $this->response();
+            }
+        }
+
+
+
+
+
+    }
+
+    public function activateCategory($catId){
+
+        if (empty($catId) || $catId<1 || !is_numeric($catId)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category Id not found";
+            return $this->response();
+        }
+
+        $catModel=new Category();
+        $catModel->setId($catId);
+        $cat= $catModel->getCategoryById();
+        if (empty($cat)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category not found";
+            return $this->response();
+        }
+        $cat->setStatus($catModel->active);
+
+
+        if ($cat->saveCategory()){
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Category has been Activated";
+            return $this->response();
+        }else{
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Something went wrong";
+            return $this->response();
+        }
+
+
+
+    }
+
+    public function deactivateCategory($catId){
+        if (empty($catId) || $catId<1 || !is_numeric($catId)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category Id not found";
+            return $this->response();
+        }
+
+        $catModel=new Category();
+
+        $catModel->setId($catId);
+        $cat= $catModel->getCategoryById();
+
+        if (empty($cat)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category not found";
+            return $this->response();
+        }
+
+        $cat->setStatus($catModel->inactive);
+
+
+        if ($cat->saveCategory()){
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Category has been De-activated";
+            return $this->response();
+        }else{
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Something went wrong";
+            return $this->response();
+        }
+
+    }
+
+
+    public function deleteCategory($catId){
+        if (empty($catId) || $catId<1 || !is_numeric($catId)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category Id not found";
+            return $this->response();
+        }
+
+        $catModel=new Category();
+        $catModel->setId($catId);
+        $cat= $catModel->getCategoryById();
+
+        if (empty($cat)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category not found";
+            return $this->response();
+        }
+
+        $cat->setStatus($catModel->deleted);
+
+
+        if ($cat->saveCategory()){
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Category has been Deleted Successfully";
+            return $this->response();
+        }else{
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Something went wrong";
+            return $this->response();
+        }
+    }
+
+    public function getEditCategoryView($catId){
+        if (empty($catId) || $catId<1 || !is_numeric($catId)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category Id not found";
+            return $this->response();
+        }
+
+        $catModel=new Category();
+        $catModel->setId($catId);
+        $cat= $catModel->getCategoryById();
+        if (empty($cat)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category not found";
+            return $this->response();
+        }
+
+        $this->pageData['cat']=$cat;
+
+        return view('admin.edit_category',$this->pageData);
+
+
+
+    }
+
+
 
 
 
