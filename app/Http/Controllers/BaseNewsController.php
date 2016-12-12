@@ -11,6 +11,7 @@ use App\Http\Controllers\coreBaseClass\ControllerErrorObj;
 use App\Http\Controllers\coreBaseClass\ServiceResponse;
 use App\Models\BaseMallBDModel;
 use Illuminate\Support\Facades\Session;
+use App\Models\Category;
 use View;
 class BaseNewsController extends Controller{
 
@@ -35,7 +36,8 @@ class BaseNewsController extends Controller{
         $this->pageData['isLogin'] = $this->serviceResponse->responseStat->isLogin;
 
         $this->pageData["appCredential"] = $this->appCredential;*/
-
+        $categorymodel=new Category();
+        $this->pageData['categoryList']=$categorymodel->getAllActiveCategories();
         
 
     }

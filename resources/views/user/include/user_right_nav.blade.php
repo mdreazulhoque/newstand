@@ -7,44 +7,33 @@
         <div class="input-group">
             <input type="text" class="form-control">
             <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
+                <button class="btn btn-default" type="button">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
         </div>
         <!-- /.input-group -->
     </div>
 
     <!-- Blog Categories Well -->
     <div class="well">
-        <h4>Blog Categories</h4>
+        <h4>News Categories</h4>
         <div class="row">
+            <?php $cont = 0; ?>
+            @foreach($categoryList as $rowData)
+            @if($cont%4 == 0)
             <div class="col-lg-6">
                 <ul class="list-unstyled">
-                    <li><a href="#">Category Name</a>
+                    @endif 
+                    <li><a href="{{ url('/category') }}">{{$rowData->category_name}}</a>
                     </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
+                    <?php $cont++; ?>
+                    @if($cont%4 == 0)
                 </ul>
             </div>
-            <!-- /.col-lg-6 -->
-            <div class="col-lg-6">
-                <ul class="list-unstyled">
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.col-lg-6 -->
+            @endif 
+            @endforeach
+            
         </div>
         <!-- /.row -->
     </div>
