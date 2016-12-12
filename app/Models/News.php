@@ -177,7 +177,8 @@ class News extends BaseModel {
         return $this::find($this->id);
     }
     public function getAllPublishNews() {
-        $allnews = $this::where("status", "Publish")
+        $allnews = $this->with("category", "user")
+                        ->where("status", "Publish")
                         ->limit($this->customLimit)
                         ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('id', 'desc')
