@@ -42,7 +42,7 @@
                             <tbody>
 
                             @foreach ($catList as $cat)
-                                @if($cat->status!='Deleted')
+                                @if($cat->status!=$cat->deleted)
                                 <tr id="row{{$cat->id}}">
                                     <td>{{$cat->category_name}}</td>
 
@@ -52,7 +52,7 @@
                                         <td id="{{$cat->id}}" style="color: red">Deactivate</td>
                                     @endif
 
-                                    @if($cat->status==='Active')
+                                    @if($cat->status==$cat->active)
                                         <td ><button id="btn{{$cat->id}}"  onclick="activationCategory({{$cat->id}});" type="button" class="btn btn-danger">Deactivate</button></td>
                                     @else
                                         <td><button id="btn{{$cat->id}}" onclick="activationCategory({{$cat->id}});" type="button" class="btn btn-success">Activate</button></td>

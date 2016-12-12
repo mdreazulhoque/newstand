@@ -47,26 +47,21 @@
                             <tbody>
 
                             @foreach ($newsList as $news)
-                                @if($cat->status!='Deleted')
+                                @if($news->status!=$news->deleted)
                                     <tr id="row{{$news->id}}">
-                                        <td>{{$news->category_name}}</td>
+                                        <td>{{$news->news_title}}</td>
+                                        <td>{{$news->news_content}}</td>
+                                        <td>{{$news->user->first_name}} {{$news->user->last_name}}</td>
+                                        <td>{{$news->category->category_name}}</td>
+                                        <td>{{$news->status}}</td>
+                                        @if($news->status==$news->unpublished || $news->status==$news->pending)
+                                            <td><button id="btn{{$news->id}}"  type="button" class="btn btn-success">Publish</button></td>
 
-                                        @if($cat->status==='Active')
-                                            <td id="{{$cat->id}}" style="color: green">Active</td>
                                         @else
-                                            <td id="{{$cat->id}}" style="color: red">Deactivate</td>
+                                            <td ><button id="btn{{$news->id}}"   type="button" class="btn btn-danger">Unpublish</button></td>
                                         @endif
 
-                                        @if($cat->status==='Active')
-                                            <td ><button id="btn{{$cat->id}}"  onclick="activationCategory({{$cat->id}});" type="button" class="btn btn-danger">Deactivate</button></td>
-                                        @else
-                                            <td><button id="btn{{$cat->id}}" onclick="activationCategory({{$cat->id}});" type="button" class="btn btn-success">Activate</button></td>
-                                        @endif
-
-                                        <td><a class="btn btn-primary" href="{{url('admin/category/edit/view/'.$cat->id)}}" role="button">Edit</a></td>
-
-                                        <td><button onclick="deleteCategory({{$cat->id}})" type="button" class="btn btn-danger">Delete</button> </td>
-
+                                        <td><button onclick="deleteNewsPost({{$news->id}})"  type="button" class="btn btn-danger">Delete</button></td>
                                     </tr>
                                 @endif
                             @endforeach
@@ -95,16 +90,16 @@
 
     <script>
 
-        function deleteCategory(catid) {
+        function deleteNewsPost(newsId) {
             $.ajax({
                 type: "POST",
-                url: $('#baseUrl').val() + 'admin/category/delete/'+catid,
+                url: $('#baseUrl').val() + 'admin/news/delete/'+newsId,
                 success: function (data) {
 
 
                     if (data.responseStat.status == true) {
                         $("#errorMessage").html(data.responseStat.msg).fadeIn(500).delay(2000).fadeOut(500);
-                        $('#row'+catid).hide();
+                        $('#row'+newsId).hide();
 
 
                     } else {

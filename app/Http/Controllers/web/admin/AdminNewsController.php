@@ -18,9 +18,44 @@ class AdminNewsController extends BaseNewsController
     public function getAllNews(){
         $newsModel=new News();
         $newsList=$newsModel->getAllNews();
+
+
         $this->pageData['newsList']=$newsList;
 
         return view('admin.all_news',$this->pageData);
+    }
+
+
+    public function deleteNews($newsId){
+        if (empty($newsId) || $newsId<1 || !is_numeric($newsId)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "News not found";
+            return $this->response();
+        }
+
+        $newsModel=new News();
+        $newsModel->setId($newsId);
+        $news= $newsModel->getNewsById();
+
+        if (empty($news)){
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = "Category not found";
+            return $this->response();
+        }
+
+        $news->setStatus($newsModel->deleted);
+
+
+        if ($news->saveNews()){
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "News has been Deleted Successfully";
+            return $this->response();
+        }else{
+            $this->serviceResponse->responseStat->status = true;
+            $this->serviceResponse->responseStat->msg = "Something went wrong";
+            return $this->response();
+        }
+
     }
 
 }

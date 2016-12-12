@@ -12,6 +12,15 @@ namespace App\Models;
 class News extends BaseModel {
 
     /**
+     * The variables are enum values for status column for this table.
+     *
+     * @var string
+     */
+    public $pending = "Pending";
+    public $publish = "Publish";
+    public $unpublished = "Unpublished";
+    public $deleted="Deleted";
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -165,12 +174,14 @@ class News extends BaseModel {
     }
 
     public function getAllNews() {
-        $users = $this->All();
+        $allnews = $this->with("category", "user")
+            ->orderBy('id', 'desc')
+            ->get();
 
-        if ($users == null)
+        if ($allnews == null)
             return null;
 
-        return $users;
+        return $allnews;
     }
 
     public function getNewsById() {
