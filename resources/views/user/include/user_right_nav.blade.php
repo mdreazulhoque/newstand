@@ -17,17 +17,23 @@
 
     <!-- Blog Categories Well -->
     <div class="well">
-        <h4>Blog Categories</h4>
+        <h4>News Categories</h4>
         <div class="row">
+            <?php $cont = 0; ?>
+            @foreach($categoryList as $rowData)
+            @if($cont%4 == 0)
             <div class="col-lg-6">
                 <ul class="list-unstyled">
-                    @foreach($categoryList as $rowData)
+                    @endif 
                     <li><a href="{{ url('/category') }}">{{$rowData->category_name}}</a>
                     </li>
-                    @endforeach
+                    <?php $cont++; ?>
+                    @if($cont%4 == 0)
                 </ul>
             </div>
-
+            @endif 
+            @endforeach
+            
         </div>
         <!-- /.row -->
     </div>

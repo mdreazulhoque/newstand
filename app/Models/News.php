@@ -18,6 +18,14 @@ class News extends BaseModel {
      */
     protected $table = 'news';
     
+    public function user()
+    {
+        return $this->hasOne("App\Models\User","id","created_by");
+    }
+    public function category()
+    {
+        return $this->hasOne("App\Models\Category","id","category_id");
+    }
     /**
      * @param mixed $category_id
      */
