@@ -92,7 +92,6 @@ class Category extends BaseModel {
     }
 
     public function insertCategory() {
-
         return $this->save();
     }
 
@@ -107,6 +106,16 @@ class Category extends BaseModel {
 
     public function getCategoryById() {
         return $this::find($this->id);
+    }
+    public function getAllActiveCategories() {
+        $allcategories = $this::where("status", "Active")
+                        ->get();
+
+        if ($allcategories == null) {
+            return null;
+        }
+        
+        return $allcategories;
     }
 
 }

@@ -151,7 +151,7 @@ class News extends BaseModel {
         return true;
     }
 
-    public function insertNews() {
+    public function saveNews() {
 
         return $this->save();
     }
@@ -168,5 +168,19 @@ class News extends BaseModel {
     public function getNewsById() {
         return $this::find($this->id);
     }
+    public function getAllPublishNews() {
+        $allnews = $this::where("status", "Publish")
+                        ->limit($this->customLimit)
+                        ->offset($this->customLimit * $this->customOffset)
+                        ->orderBy('id', 'desc')
+                        ->get();
+
+        if ($allnews == null) {
+            return null;
+        }
+        
+        return $allnews;
+    }
+    
 
 }
