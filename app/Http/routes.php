@@ -22,9 +22,9 @@ Route::post('user/register','SignUpController@registerUser');
 
 Route::get('user/register/view','SignUpController@registrationView');
 
-Route::post('user/password/set/{id}','UserController@setPassword');
+Route::post('user/password/set/{id}','Web\AppUser\UserController@setPassword');
 
-Route::get('user/password_set/view','UserController@setPasswordView');
+Route::get('user/password_set/view','Web\AppUser\UserController@setPasswordView');
 
 Route::get('email/verify/{id}','EmailVerificationController@verifyEmail');
 
@@ -77,9 +77,10 @@ Route::get('/news/search/{search_val}','web\appUser\UserNewsController@getNewsBy
 
 /// Raza Urls
 
-Route::get('/news/users/{id}','web\appUser\UserNewsController@getNewByUserIdView');
-Route::get('/postnews','web\appUser\UserNewsController@createNewsView');
+Route::get('/createnews','web\appUser\UserNewsController@createNewsView');
 Route::post('/newsPost','web\appUser\UserNewsController@createNews');
+Route::get('/mynews','web\appUser\UserNewsController@getNewByUserIdView');
+Route::get('/delete_news/{id}','web\appUser\UserNewsController@deleteNews');
 
 
 

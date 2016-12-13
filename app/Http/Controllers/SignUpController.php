@@ -11,11 +11,18 @@ use Illuminate\Support\Facades\Validator;
 
 class SignUpController extends BaseNewsController{
 
-
+    /**
+     * for showing user registration view
+     * @return \Illuminate\View\View
+     */
     public function registrationView(){
         return view('user.registration',$this->pageData);
     }
-
+    /**
+     * for registering user
+     * @param   \Illuminate\Http\Request $request
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function registerUser(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -110,7 +117,11 @@ class SignUpController extends BaseNewsController{
     }
 
 
-
+    /**
+     * for registering Admin
+     * @param   \Illuminate\Http\Request $request
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function registerAdmin(Request $request){
 
         $validator = Validator::make($request->all(), [

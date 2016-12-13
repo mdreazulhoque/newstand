@@ -21,7 +21,7 @@
                             <thead>
                             <tr>
                                 <th>News title</th>
-                                <th>Short Description</th>
+                                <th>Content</th>
                                 <th>Published by</th>
                                 <th>Category</th>
                                 <th>Status</th>
@@ -34,7 +34,7 @@
                             <tfoot>
                             <tr>
                                 <th>News title</th>
-                                <th>Short Description</th>
+                                <th>Content</th>
                                 <th>Published by</th>
                                 <th>Category</th>
                                 <th>Status</th>
@@ -49,7 +49,7 @@
                             @foreach ($newsList as $news)
                                 @if($news->status!=$news->deleted)
                                     <tr id="row{{$news->id}}">
-                                        <td>{{$news->news_title}}</td>
+                                        <td><a target="_blank" href="{{url('/news/' . $news->news_slug)}}">{{$news->news_title}}</a></td>
                                         <td>{{$news->news_content}}</td>
                                         <td>{{$news->user->first_name}} {{$news->user->last_name}}</td>
                                         <td>{{$news->category->category_name}}</td>

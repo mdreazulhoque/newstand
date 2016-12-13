@@ -30,13 +30,14 @@ class UserNewsController extends BaseNewsController {
      * @param $userId
      * @return \Illuminate\View\View
      */
-    public function getNewByUserIdView($userId) {
+    public function getNewByUserIdView() {
+
         $newsModel = new News();
         $newsModel->setCustomLimit(10);
         $newsModel->setCustomOffset(0);
-        $newsModel->setCurrentUserId($userId);
+        $newsModel->setCurrentUserId($this->appCredential->id);
         $this->pageData['newsList'] = $newsModel->getAllNewsByUserId();
-        return view('user.news_all',$this->pageData);
+        return view('user.my_news',$this->pageData);
     }
 
 
@@ -46,12 +47,11 @@ class UserNewsController extends BaseNewsController {
      * @return \Illuminate\View\View
      */
     public function getNewsBySlugView($slug) {
-
         $newsModel = new News();        
-        $newsModel->setCustomLimit(10);
+        $newsModel->setCustomLimit(1);
         $newsModel->setCustomOffset(0);
-        $newsModel->setSlugWhileGet($slug); 
-        $this->pageData['newsDetails'] =$newsModel->getNewBySlug();
+        $newsModel->setNewsSlug($slug);
+        $this->pageData['newsDetails'] =$newsModel->getMyNewBySlug();
         return view('user.news_details',$this->pageData);
     }
 
@@ -102,8 +102,6 @@ class UserNewsController extends BaseNewsController {
 
     public function createNews(Request $request){
 
-         
-
         $validator = Validator::make($request->all(), [
             'category' => 'required',
             'news_title' => 'required|max:255',
@@ -113,9 +111,9 @@ class UserNewsController extends BaseNewsController {
 
         if ($validator->fails()) {
 
-            $this->serviceResponse->responseStat->status = false;
-            $this->serviceResponse->responseStat->msg = $validator->errors()->first();
-            return $this->response();
+            return redirect('/createnews')
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $newsModel=new News();
@@ -130,11 +128,18 @@ class UserNewsController extends BaseNewsController {
         $newsModel->setPhotoUrl('img/'.$imagename);
         $newsModel->setNewsContent($request->input('news_content'));
         $newsModel->setNewsSlug($request->input('news_title'));
-        $newsModel->setCreatedBy();
+        $newsModel->setCreatedBy($this->appCredential->id);
 
-        $newsModel->saveNews();
+
+        if($newsModel->saveNews()){
+            return redirect('mynews')->with('status', 'News Successfully Inserted');
+        }else{
+            return redirect('mynews')->with('status', 'Somthing Wrong');
+        }
 
     }
+
+
 
     /**
      * for making pdf
@@ -189,6 +194,21 @@ class UserNewsController extends BaseNewsController {
         $rssfeed .= '</rss>';
 
         echo $rssfeed;
+    }
+
+    public function deleteNews($id){
+
+        $newModel=new News();
+        $newModel->setId($id);
+        $news=$newModel->getNewsById();
+        $news->setStatus($news->deleted);
+
+        if( $news->saveNews()){
+            return redirect('mynews')->with('status', 'News Successfully Deleted');
+        }else{
+            return redirect('mynews')->with('status', 'Somthing Wrong');
+        }
+
     }
 
 }
