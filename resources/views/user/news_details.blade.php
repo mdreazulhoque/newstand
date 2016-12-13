@@ -35,7 +35,7 @@
     <hr>
 
     <!-- Preview Image -->
-    <img class="img-responsive" src="{{$baseUrl}}/{{$rowData->photo_url}}" alt="">
+    <img class="img-responsive" src="{{$baseUrl}}/{{$newsDetails[0]->photo_url}}" alt="">
 
     <hr>
 

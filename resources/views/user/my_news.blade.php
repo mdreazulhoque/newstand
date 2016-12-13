@@ -11,8 +11,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <h2>Basic Table</h2>
-                        <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+                        <h2>My Posted News</h2>
                         <table class="table">
                             <thead>
                             <tr>
@@ -29,7 +28,7 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$rowData->news_title}}</td>
                                     <td>{{$rowData->status}}</td>
-                                    <td><a class="btn btn-primary" href="{{url('news/'.$rowData->news_slug)}}">Details</a> <a class="btn btn-danger" href="{{url('delete_news/'.$rowData->id)}}">Delete</a></td>
+                                    <td><a class="btn btn-primary" href="{{url('news/details/'.$rowData->news_slug)}}">Details</a> <a class="btn btn-danger" href="{{url('delete_news/'.$rowData->id)}}">Delete</a></td>
                                 </tr>
                                 @endforeach
                             @endif

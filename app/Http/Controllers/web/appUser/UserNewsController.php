@@ -50,7 +50,21 @@ class UserNewsController extends BaseNewsController {
         $newsModel = new News();        
         $newsModel->setCustomLimit(1);
         $newsModel->setCustomOffset(0);
-        $newsModel->setNewsSlug($slug);
+        $newsModel->setNewsSlug($slug,false);
+        $this->pageData['newsDetails'] =$newsModel->getNewBySlug();
+        return view('user.news_details',$this->pageData);
+    }
+    /**
+     * for showing news by slug
+     * @param $slug
+     * @return \Illuminate\View\View
+     */
+    public function getNewsByMySlugView($slug) {
+        $newsModel = new News();
+        $newsModel->setCustomLimit(1);
+        $newsModel->setCustomOffset(0);
+        $newsModel->setNewsSlug($slug,false);
+        $newsModel->setCurrentUserId($this->appCredential->id);
         $this->pageData['newsDetails'] =$newsModel->getMyNewBySlug();
         return view('user.news_details',$this->pageData);
     }
