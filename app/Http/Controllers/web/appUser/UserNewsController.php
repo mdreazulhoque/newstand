@@ -67,6 +67,8 @@ class UserNewsController extends BaseNewsController {
 
     public function createNews(Request $request){
 
+         
+
         $validator = Validator::make($request->all(), [
             'category' => 'required',
             'news_title' => 'required|max:255',
@@ -96,7 +98,7 @@ class UserNewsController extends BaseNewsController {
         $newsModel->setCreatedBy();
 
         $newsModel->saveNews();
-        
+
     }
 
     //pdf download
