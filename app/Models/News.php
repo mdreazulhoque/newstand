@@ -315,10 +315,8 @@ class News extends BaseModel {
         $allnews = $this->with("category", "user")
             ->whereIn("status", ["Publish","Unpublished","Pending"])
             ->where('created_by',$this->currentUserId)
-            ->limit($this->customLimit)
-            ->offset($this->customLimit * $this->customOffset)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(10);
 
         if ($allnews == null) {
             return null;

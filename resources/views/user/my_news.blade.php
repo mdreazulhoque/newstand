@@ -34,6 +34,7 @@
                             @endif
                             </tbody>
                         </table>
+                        <?php echo $newsList->render(); ?>
                 </div>
             </div>
         </div>
