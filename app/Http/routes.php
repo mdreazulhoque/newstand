@@ -46,6 +46,7 @@ Route::group(['middleware' => 'AuthFilter'], function () {
 Route::get('admin/home','Web\Admin\AdminHomeController@index');
 
 Route::get('/','Web\AppUser\UserHomeController@index');
+Route::get('/home','Web\AppUser\UserHomeController@index');
 Route::get('admin/category/all','Web\Admin\AdminCategoryController@getllCategoryView');
 Route::get('admin/category/add-new','Web\Admin\AdminCategoryController@getAddNewCategoryView');
 Route::post('admin/category/save-new-category','Web\Admin\AdminCategoryController@saveNewCategory');

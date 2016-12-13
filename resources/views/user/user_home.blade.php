@@ -28,7 +28,7 @@
                 </h1>
 
                 
-                @foreach($categoryList as $rowData)
+                @foreach($newsList as $rowData)
                         <!--  Blog Post -->
                         <h2>
                             <a href="#">Blog Post Title</a>
