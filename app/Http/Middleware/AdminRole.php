@@ -12,9 +12,7 @@ class AdminRole extends BaseNewsController
     {
         if(Auth::user()->role !="Admin")
         {
-            $this->serviceResponse->responseStat->status = false;
-            $this->serviceResponse->responseStat->msg = "You are not Admin !";
-            return $this->response();
+            return redirect('home')->send();
         }
         return $next($request);
 
