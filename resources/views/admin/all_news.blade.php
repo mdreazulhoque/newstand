@@ -49,7 +49,7 @@
                             @foreach ($newsList as $news)
                                 @if($news->status!=$news->deleted)
                                     <tr id="row{{$news->id}}">
-                                        <td><a target="_blank" href="{{url('/news/' . $news->news_slug)}}">{{$news->news_title}}</a></td>
+                                        <td><a target="_blank" href="{{url('news/details/' . $news->news_slug)}}">{{$news->news_title}}</a></td>
                                         <td>{{$news->news_content}}</td>
                                         <td>{{$news->user->first_name}} {{$news->user->last_name}}</td>
                                         <td>{{$news->category->category_name}}</td>
