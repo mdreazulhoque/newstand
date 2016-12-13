@@ -85,7 +85,7 @@ class AdminNewsController extends BaseNewsController
             return $this->response();
         }
 
-        $news->setStatus($newsModel->publish);
+        $news->setStatus($newsModel->unpublished);
 
 
         if ($news->saveNews()){
