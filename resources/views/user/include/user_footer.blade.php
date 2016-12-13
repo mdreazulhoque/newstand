@@ -51,9 +51,6 @@
 
     $('#submitBtn').click(function () {
 
-
-        $('#category_id').val();
-
         if($('#category').val()==""){
             $('#notification').html("Category Can Be Empty");
             return false;
@@ -70,6 +67,9 @@
             $('#notification').html("News Content Title Can Be Empty");
             return false;
         }
+
+        $('#formSubmit').submit();
+
     });
 
     function register() {
