@@ -63,10 +63,11 @@
             $('#notification').html("Photo Must Be Uploaded");
             return false;
         }
-        if($('#news_content').val()==""){
+        if(tinyMCE.activeEditor.getContent({format : 'text'})==""){
             $('#notification').html("News Content Title Can Be Empty");
             return false;
         }
+        $('#news_content').val(tinyMCE.activeEditor.getContent({format : 'text'}));
 
         $('#formSubmit').submit();
 
@@ -130,5 +131,8 @@
 
 <!-- Theme JavaScript -->
 <script src="{{asset('developer/user/js/clean-blog.min.js')}}"></script>
+
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
 
 

@@ -120,7 +120,7 @@ class UserNewsController extends BaseNewsController {
             'category' => 'required',
             'news_title' => 'required|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'news_content' => 'required|max:255',
+            'news_content' => 'required',
         ]);
 
         if ($validator->fails()) {

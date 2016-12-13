@@ -53,7 +53,8 @@
                         <div class="form-group">
                             <div class="input-group">
                                <label for="news_content">News Content</label>
-                                <textarea class="form-control" id="news_content" name="news_content" placeholder="News Content" ></textarea>
+                                <input type="hidden" name="news_content" id="news_content" value="">
+                                <textarea class="form-control" id="content" name="content" placeholder="News Content" ></textarea>
                             </div>
                         </div>
                 </div>
