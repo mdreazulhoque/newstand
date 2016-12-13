@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web\appUser;
 
 use App\Http\Controllers\BaseNewsController;
+use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -11,7 +12,10 @@ use Illuminate\Support\Facades\Validator;
 
 class UserNewsController extends BaseNewsController {
 
-    //
+    /**
+     * for showing all news view
+     * @return \Illuminate\View\View
+     */
     public function getAllNewsView() {
         $newsModel=new News();        
         $newsModel->setCustomLimit(10);
@@ -20,6 +24,12 @@ class UserNewsController extends BaseNewsController {
         return view('user.news_all',$this->pageData);
     }
 
+
+    /**
+     * for showing all news posted by a user
+     * @param $userId
+     * @return \Illuminate\View\View
+     */
     public function getNewByUserIdView($userId) {
         $newsModel = new News();
         $newsModel->setCustomLimit(10);
@@ -28,7 +38,13 @@ class UserNewsController extends BaseNewsController {
         $this->pageData['newsList'] = $newsModel->getAllNewsByUserId();
         return view('user.news_all',$this->pageData);
     }
-    
+
+
+    /**
+     * for showing news by slug
+     * @param $slug
+     * @return \Illuminate\View\View
+     */
     public function getNewsBySlugView($slug) {
 
         $newsModel = new News();        
@@ -38,6 +54,12 @@ class UserNewsController extends BaseNewsController {
         $this->pageData['newsDetails'] =$newsModel->getNewBySlug();
         return view('user.news_details',$this->pageData);
     }
+
+    /**
+     * for showing search result view
+     * @param $search_val
+     * @return \Illuminate\View\View
+     */
     public function getNewsBySearchView($search_val) {
         $newsModel = new News();        
         $newsModel->setCustomLimit(10);
@@ -46,10 +68,15 @@ class UserNewsController extends BaseNewsController {
         $this->pageData['searchVal'] =$search_val;
         return view('user.news_all',$this->pageData);
     }
-    
-    public function getNewsByCatIdView($catId) {
 
-        $newsModel = new News();        
+
+    /**
+     * for showing news by a category
+     * @param $catId
+     * @return \Illuminate\View\View
+     */
+    public function getNewsByCatIdView($catId) {
+        $newsModel = new News();
         $newsModel->setCustomLimit(10);
         $newsModel->setCustomOffset(0);
         $newsModel->setUserCategoryId($catId); 
@@ -58,29 +85,62 @@ class UserNewsController extends BaseNewsController {
     }
 
 
+    /**
+     * for creating a news
+     * @param  \Illuminate\Http\Request  $request
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
+
+    public function createNewsView(){
+
+        $catModel=new Category();
+        $this->pageData['category']=$catModel->getAllCategories();
+
+        return view('user.create_news',$this->pageData);
+    }
+
+
     public function createNews(Request $request){
 
+         
+
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|max:55',
-            'last_name' => 'required|max:55',
-            'phone' => 'required|max:15',
-            'birth_month' => 'required|max:2',
-            'birth_day' => 'required|max:2',
-            'birth_year' => 'required|max:4',
-            'address' => 'required|max:150',
-            'email' => 'required|email|max:255|unique:login_users',
+            'category' => 'required',
+            'news_title' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'news_content' => 'required|max:255',
         ]);
 
         if ($validator->fails()) {
+
             $this->serviceResponse->responseStat->status = false;
             $this->serviceResponse->responseStat->msg = $validator->errors()->first();
             return $this->response();
         }
 
+        $newsModel=new News();
+
+        $image = $request->file('image');
+        $imagename = time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('/img');
+        $image->move($destinationPath, $imagename);
+
+        $newsModel->setUserCategoryId($request->input('category'));
+        $newsModel->setNewsTitle($request->input('news_title'));
+        $newsModel->setPhotoUrl('img/'.$imagename);
+        $newsModel->setNewsContent($request->input('news_content'));
+        $newsModel->setNewsSlug($request->input('news_title'));
+        $newsModel->setCreatedBy();
+
+        $newsModel->saveNews();
+
     }
 
-
-    //pdf download
+    /**
+     * for making pdf
+     * @param  $slug
+     * @return pdf view
+     */
     public function getNewsBySlugDownload($slug) {
         $newsModel = new News();        
         $newsModel->setCustomLimit(1);
@@ -91,7 +151,13 @@ class UserNewsController extends BaseNewsController {
         $pdf->loadView('user.news_download', $this->pageData);
         return $pdf->download('News_'.$slug.'.pdf');
     }
-    //rss feed
+
+
+    /**
+     * for rss feed
+     * @param  $slug
+     * @return recent 10 news for rss feed
+     */
 
     public function rss() {
         $newsModel = new News();

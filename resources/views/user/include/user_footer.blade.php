@@ -49,6 +49,28 @@
 
     }
 
+    $('#submitBtn').click(function () {
+
+
+        $('#category_id').val();
+
+        if($('#category').val()==""){
+            $('#notification').html("Category Can Be Empty");
+            return false;
+        }
+        if($('#news_title').val()==""){
+            $('#notification').html("News Title Can Be Empty");
+            return false;
+        }
+        if($('#photo_url').val()==""){
+            $('#notification').html("Photo Must Be Uploaded");
+            return false;
+        }
+        if($('#news_content').val()==""){
+            $('#notification').html("News Content Title Can Be Empty");
+            return false;
+        }
+    });
 
     function register() {
         $('#notification').html('');
@@ -88,7 +110,6 @@
                 alert('Error occured');
             }
         });
-
     }
 
     function submit_search() {

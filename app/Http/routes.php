@@ -77,6 +77,8 @@ Route::get('/news/search/{search_val}','web\appUser\UserNewsController@getNewsBy
 /// Raza Urls
 
 Route::get('/news/users/{id}','web\appUser\UserNewsController@getNewByUserIdView');
+Route::get('/postnews','web\appUser\UserNewsController@createNewsView');
+Route::post('/newsPost','web\appUser\UserNewsController@createNews');
 
 
 

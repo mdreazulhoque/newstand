@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tomal
- * Date: 12/11/2016
- * Time: 11:42 PM
- */
+
 
 namespace App\Http\Controllers\Web\Admin;
 
@@ -17,7 +12,10 @@ class AdminCategoryController extends BaseNewsController
 {
 
 
-
+    /**
+     * show admin.all_category view
+     * @return \Illuminate\View\View
+     */
     public function getllCategoryView(){
 
         $catModel=new Category();
@@ -27,12 +25,21 @@ class AdminCategoryController extends BaseNewsController
 
     }
 
+    /**
+     * for showing new category view
+     * @return \Illuminate\View\View
+     */
     public function getAddNewCategoryView(){
 
         return view('admin.add_new_category');
 
     }
 
+    /**
+     * for creating new category
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\view
+     */
     public function saveNewCategory(Request $request){
 
         $catModel=new Category();
@@ -60,6 +67,11 @@ class AdminCategoryController extends BaseNewsController
 
     }
 
+    /**
+     * for edit a category
+     * @param  \Illuminate\Http\Request  $request
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function editCategory(Request $request){
         $catName=$request->input('cat_name');
         $catid=$request->input('id');
@@ -95,6 +107,11 @@ class AdminCategoryController extends BaseNewsController
 
     }
 
+    /**
+     * for activating a category
+     * @param   $catId
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function activateCategory($catId){
 
         if (empty($catId) || $catId<1 || !is_numeric($catId)){
@@ -128,6 +145,11 @@ class AdminCategoryController extends BaseNewsController
 
     }
 
+    /**
+     * for activating a category
+     * @param   $catId
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function deactivateCategory($catId){
         if (empty($catId) || $catId<1 || !is_numeric($catId)){
             $this->serviceResponse->responseStat->status = false;
@@ -161,7 +183,11 @@ class AdminCategoryController extends BaseNewsController
 
     }
 
-
+    /**
+     * for deleting a category
+     * @param   $catId
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function deleteCategory($catId){
         if (empty($catId) || $catId<1 || !is_numeric($catId)){
             $this->serviceResponse->responseStat->status = false;
@@ -193,6 +219,10 @@ class AdminCategoryController extends BaseNewsController
         }
     }
 
+    /**
+     * for showing category edit view
+     * @return \Illuminate\View\View
+     */
     public function getEditCategoryView($catId){
         if (empty($catId) || $catId<1 || !is_numeric($catId)){
             $this->serviceResponse->responseStat->status = false;

@@ -5,6 +5,10 @@ use App\Models\Category;
 use App\Models\News;
 class UserHomeController extends BaseNewsController
 {
+    /**
+     * for showing new category view
+     * @return \Illuminate\View\View
+     */
 
     public function index(){        
         $newsModel=new News();        
@@ -13,6 +17,11 @@ class UserHomeController extends BaseNewsController
         $this->pageData['newsList']=$newsModel->getAllPublishNews();
         return view('user.user_home',$this->pageData);
     }
+
+    /**
+     * for showing category edit view
+     * @return \Illuminate\View\View
+     */
     public function about(){
         return view('user.about',$this->pageData);
     }

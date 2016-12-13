@@ -6,7 +6,7 @@
 <body class="theme-red">
 <input type="hidden" id="baseUrl" value="{{url('/')}}/" />
 
-@include('admin.include.admin_search_bar')
+
 
 @include('admin.include.admin_top_nav')
 
