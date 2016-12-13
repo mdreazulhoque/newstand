@@ -9,7 +9,6 @@ class EmailController extends Controller {
      * @param  string  $to
      * * @param  string  $subject
      * * @param  string  $message
-     * @return \Illuminate\Http\Response
      */
 
     public function sendEmail($to, $subject, $message){

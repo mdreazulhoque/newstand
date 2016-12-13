@@ -1,9 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * Project: NewsStand
- * File: BaseNewsController.php
- */
+
 
 namespace App\Http\Controllers;
 

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tomal
- * Date: 12/13/2016
- * Time: 1:09 AM
- */
+
 
 namespace App\Http\Controllers\Web\Admin;
 
@@ -14,7 +9,10 @@ use App\Models\News;
 
 class AdminNewsController extends BaseNewsController
 {
-
+    /**
+     * show admin.all_news view
+     * @return \Illuminate\View\View
+     */
     public function getAllNews(){
         $newsModel=new News();
         $newsList=$newsModel->getAllNews();
@@ -25,7 +23,11 @@ class AdminNewsController extends BaseNewsController
         return view('admin.all_news',$this->pageData);
     }
 
-
+    /**
+     * for publishing a news
+     * @param  $newsId
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
 
     public function publishNews($newsId){
         if (empty($newsId) || $newsId<1 || !is_numeric($newsId)){
@@ -58,6 +60,11 @@ class AdminNewsController extends BaseNewsController
         }
     }
 
+    /**
+     * for unpublishing a news
+     * @param  $newsId
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function unpublishNews($newsId){
         if (empty($newsId) || $newsId<1 || !is_numeric($newsId)){
             $this->serviceResponse->responseStat->status = false;
@@ -88,7 +95,11 @@ class AdminNewsController extends BaseNewsController
             return $this->response();
         }
     }
-
+    /**
+     * for deleting a news
+     * @param  $newsId
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function deleteNews($newsId){
         if (empty($newsId) || $newsId<1 || !is_numeric($newsId)){
             $this->serviceResponse->responseStat->status = false;
