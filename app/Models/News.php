@@ -299,10 +299,8 @@ class News extends BaseModel {
     public function getAllPublishNews() {
         $allnews = $this->with("category", "user")
                         ->where("status", "Publish")
-                        ->limit($this->customLimit)
-                        ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('created_at', 'desc')
-                        ->get();
+                        ->paginate(10);
 
         if ($allnews == null) {
             return null;
