@@ -204,6 +204,7 @@ class News extends BaseModel {
     }
 
     public function getNewBySlug(){
+
         $allnews = $this->with("category", "user")
                         ->where("status", "Publish")
                         ->where('news_slug',$this->news_slug)
@@ -273,6 +274,7 @@ class News extends BaseModel {
         return $allnews;
     }
     public function getAllNewsByUserId() {
+
         $allnews = $this->with("category", "user")
             ->whereIn("status", ["Publish","Unpublished","Pending"])
             ->where('created_by',$this->currentUserId)

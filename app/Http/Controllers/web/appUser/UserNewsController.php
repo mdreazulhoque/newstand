@@ -7,11 +7,12 @@ use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class UserNewsController extends BaseNewsController {
 
     //
-    public function getAllNewsView() {       
+    public function getAllNewsView() {
         $newsModel=new News();        
         $newsModel->setCustomLimit(10);
         $newsModel->setCustomOffset(0);
@@ -19,17 +20,19 @@ class UserNewsController extends BaseNewsController {
         return view('user.news_all',$this->pageData);
     }
 
-    public function getNewByUserIdView() {
-        $userID = 1;
+    public function getNewByUserIdView($userId) {
         $newsModel = new News();
-        $newsModel->setCurrentUserId($userID);
+        $newsModel->setCustomLimit(10);
+        $newsModel->setCustomOffset(0);
+        $newsModel->setCurrentUserId($userId);
         $this->pageData['newsList'] = $newsModel->getAllNewsByUserId();
+        return view('user.news_all',$this->pageData);
     }
     
     public function getNewsBySlugView($slug) {
 
         $newsModel = new News();        
-        $newsModel->setCustomLimit(1);
+        $newsModel->setCustomLimit(10);
         $newsModel->setCustomOffset(0);
         $newsModel->setSlugWhileGet($slug); 
         $this->pageData['newsDetails'] =$newsModel->getNewBySlug();
@@ -52,6 +55,27 @@ class UserNewsController extends BaseNewsController {
         $newsModel->setUserCategoryId($catId); 
         $this->pageData['newsList'] =$newsModel->getNewByCatId();
         return view('user.news_all',$this->pageData);
+    }
+
+    public function createNews(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|max:55',
+            'last_name' => 'required|max:55',
+            'phone' => 'required|max:15',
+            'birth_month' => 'required|max:2',
+            'birth_day' => 'required|max:2',
+            'birth_year' => 'required|max:4',
+            'address' => 'required|max:150',
+            'email' => 'required|email|max:255|unique:login_users',
+        ]);
+
+        if ($validator->fails()) {
+            $this->serviceResponse->responseStat->status = false;
+            $this->serviceResponse->responseStat->msg = $validator->errors()->first();
+            return $this->response();
+        }
+
     }
 
     public function rss() {

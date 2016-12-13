@@ -62,10 +62,17 @@ Route::post('admin/news/publish/{newsId}','Web\Admin\AdminNewsController@publish
 Route::post('admin/news/unpublish/{newsId}','Web\Admin\AdminNewsController@unpublishNews');
 
 Route::get('/rss','Web\AppUser\UserNewsController@rss');
-Route::get('/news/{slug}','Web\AppUser\UserNewsController@getNewsBySlugView');
+Route::get('/news/{slug}','web\appUser\UserNewsController@getNewsBySlugView');
 Route::get('/news/category/{catId}','Web\AppUser\UserNewsController@getNewsByCatIdView');
-Route::get('/allnews','Web\AppUser\UserNewsController@getAllNewsView');
-Route::get('/news/search/{search_val}','Web\AppUser\UserNewsController@getNewsBySearchView');
+Route::get('/allnews','web\appUser\UserNewsController@getAllNewsView');
+Route::get('/news/search/{search_val}','web\appUser\UserNewsController@getNewsBySearchView');
+
+
+/// Raza Urls
+
+Route::get('/news/users/{id}','web\appUser\UserNewsController@getNewByUserIdView');
+
+
 
 
 
