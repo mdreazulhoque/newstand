@@ -43,6 +43,7 @@ Route::group(['middleware' => 'AuthFilter'], function () {
         Route::post('/newsPost','web\appUser\UserNewsController@createNews');
         Route::get('/mynews','web\appUser\UserNewsController@getNewByUserIdView');
         Route::get('/delete_news/{id}','web\appUser\UserNewsController@deleteNews');
+        Route::get('/news/details/{slug}','web\appUser\UserNewsController@getNewsByMySlugView');
     });
     Route::group(['middleware' => 'AdminRole'], function () {
         Route::get('admin/home','Web\Admin\AdminHomeController@index');
@@ -80,7 +81,6 @@ Route::get('/allnews','web\appUser\UserNewsController@getAllNewsView');
 Route::get('/news/search/{search_val}','web\appUser\UserNewsController@getNewsBySearchView');
 
 
-Route::get('/news/details/{slug}','web\appUser\UserNewsController@getNewsByMySlugView');
 
 
 
