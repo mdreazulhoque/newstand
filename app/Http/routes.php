@@ -39,7 +39,10 @@ Route::group(['middleware' => 'AuthFilter'], function () {
 
     Route::get('/logout', 'LoginController@logout');
     Route::group(['middleware' => 'UserRole'], function () {
-        
+        Route::get('/createnews','web\appUser\UserNewsController@createNewsView');
+        Route::post('/newsPost','web\appUser\UserNewsController@createNews');
+        Route::get('/mynews','web\appUser\UserNewsController@getNewByUserIdView');
+        Route::get('/delete_news/{id}','web\appUser\UserNewsController@deleteNews');
     });
     Route::group(['middleware' => 'AdminRole'], function () {
         Route::get('admin/home','Web\Admin\AdminHomeController@index');
@@ -77,13 +80,7 @@ Route::get('/allnews','web\appUser\UserNewsController@getAllNewsView');
 Route::get('/news/search/{search_val}','web\appUser\UserNewsController@getNewsBySearchView');
 
 
-// Raza Urls
-
-Route::get('/createnews','web\appUser\UserNewsController@createNewsView');
-Route::post('/newsPost','web\appUser\UserNewsController@createNews');
-Route::get('/mynews','web\appUser\UserNewsController@getNewByUserIdView');
-Route::get('/delete_news/{id}','web\appUser\UserNewsController@deleteNews');
-Route::get('/mynews/{slug}','web\appUser\UserNewsController@getNewsByMySlugView');
+Route::get('/news/details/{slug}','web\appUser\UserNewsController@getNewsByMySlugView');
 
 
 
