@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Validator;
 
 class UserNewsController extends BaseNewsController {
 
-    //
+    /**
+     * for showing all news view
+     * @return \Illuminate\View\View
+     */
     public function getAllNewsView() {
         $newsModel=new News();        
         $newsModel->setCustomLimit(10);
@@ -21,6 +24,12 @@ class UserNewsController extends BaseNewsController {
         return view('user.news_all',$this->pageData);
     }
 
+
+    /**
+     * for showing all news posted by a user
+     * @param $userId
+     * @return \Illuminate\View\View
+     */
     public function getNewByUserIdView($userId) {
         $newsModel = new News();
         $newsModel->setCustomLimit(10);
@@ -29,7 +38,13 @@ class UserNewsController extends BaseNewsController {
         $this->pageData['newsList'] = $newsModel->getAllNewsByUserId();
         return view('user.news_all',$this->pageData);
     }
-    
+
+
+    /**
+     * for showing news by slug
+     * @param $slug
+     * @return \Illuminate\View\View
+     */
     public function getNewsBySlugView($slug) {
 
         $newsModel = new News();        
@@ -39,6 +54,12 @@ class UserNewsController extends BaseNewsController {
         $this->pageData['newsDetails'] =$newsModel->getNewBySlug();
         return view('user.news_details',$this->pageData);
     }
+
+    /**
+     * for showing search result view
+     * @param $search_val
+     * @return \Illuminate\View\View
+     */
     public function getNewsBySearchView($search_val) {
         $newsModel = new News();        
         $newsModel->setCustomLimit(10);
@@ -47,7 +68,13 @@ class UserNewsController extends BaseNewsController {
         $this->pageData['searchVal'] =$search_val;
         return view('user.news_all',$this->pageData);
     }
-    
+
+
+    /**
+     * for showing news by a category
+     * @param $catId
+     * @return \Illuminate\View\View
+     */
     public function getNewsByCatIdView($catId) {
         $newsModel = new News();
         $newsModel->setCustomLimit(10);
@@ -57,6 +84,13 @@ class UserNewsController extends BaseNewsController {
         return view('user.news_all',$this->pageData);
     }
 
+
+    /**
+     * for creating a news
+     * @param  \Illuminate\Http\Request  $request
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
+
     public function createNewsView(){
 
         $catModel=new Category();
@@ -64,6 +98,7 @@ class UserNewsController extends BaseNewsController {
 
         return view('user.create_news',$this->pageData);
     }
+
 
     public function createNews(Request $request){
 
@@ -101,7 +136,11 @@ class UserNewsController extends BaseNewsController {
 
     }
 
-    //pdf download
+    /**
+     * for making pdf
+     * @param  $slug
+     * @return pdf view
+     */
     public function getNewsBySlugDownload($slug) {
         $newsModel = new News();        
         $newsModel->setCustomLimit(1);
@@ -112,7 +151,13 @@ class UserNewsController extends BaseNewsController {
         $pdf->loadView('user.news_download', $this->pageData);
         return $pdf->download('News_'.$slug.'.pdf');
     }
-    //rss feed
+
+
+    /**
+     * for rss feed
+     * @param  $slug
+     * @return recent 10 news for rss feed
+     */
 
     public function rss() {
         $newsModel = new News();

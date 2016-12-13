@@ -23,10 +23,10 @@ class LoginController extends BaseNewsController{
     }
 
     /**
-     * for login
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ * for login
+ * @param  \Illuminate\Http\Request  $request
+ * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+ */
 
     public function loginAttempt(Request $request){
 
@@ -99,7 +99,7 @@ class LoginController extends BaseNewsController{
 
     /**
      * For Logout
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
      */
 
     public function logout(){
