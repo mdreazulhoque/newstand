@@ -29,6 +29,7 @@ Route::get('user/password_set/view','UserController@setPasswordView');
 Route::get('email/verify/{id}','EmailVerificationController@verifyEmail');
 
 Route::get('user/login/view','LoginController@loginView');
+Route::get('admin','LoginController@adminloginView');
 Route::post('login', 'LoginController@loginAttempt');
 
 

@@ -19,6 +19,9 @@
                  <li>
                     <a href="{{ url('/allnews') }}">All News</a>
                 </li>                
+                <li>
+                    <a href="{{ url('/about') }}">About Us</a>
+                </li>
                 @if(!\Illuminate\Support\Facades\Auth::check())
                     <li>
                         <a href="{{\Illuminate\Support\Facades\URL::to('user/login/view')}}">Login</a>
@@ -28,15 +31,12 @@
                     </li>
                 @else
                     <li>
-                        <a href="">{{@\Illuminate\Support\Facades\Auth::user()->first_name}}</a>
+                        <a href="">{{@\Illuminate\Support\Facades\Auth::user()->email}}</a>
                     </li>
                     <li>
-                        <a href="{\Illuminate\Support\Facades\URL::to('logout')}}">Logout</a>
+                        <a href="{{URL::to('logout')}}">Logout</a>
                     </li>
-                @endif
-                <li>
-                    <a href="{{ url('/about') }}">About Us</a>
-                </li> 
+                @endif 
             </ul>
             <div> </div>
         </div>

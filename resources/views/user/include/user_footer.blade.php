@@ -19,13 +19,75 @@
 <script>
 
     function login() {
-
+        $('#notification').html('');
         $.ajax({
             type: "POST",
             url: $('#baseUrl').val() + 'login',
             data: {
                 email: $('#email').val(),
-                password: $('#password').val(),
+                role: "User",
+                password: $('#password').val()
+            },
+            success: function (data) {
+
+
+                if (data.responseStat.status == true) {
+
+                    $('#notification').html(data.responseStat.msg);
+                        window.location.href = $('#baseUrl').val() + 'home';
+
+                } else {
+                    $('#notification').html(data.responseStat.msg);
+                }
+
+
+            },
+            error: function () {
+                alert('Error occured');
+            }
+        });
+
+    }
+
+    $('#submitBtn').click(function () {
+
+<<<<<<< HEAD
+        $('#category_id').val();
+
+        if($('#category').val()==""){
+            $('#notification').html("Category Can Be Empty");
+            return false;
+        }
+        if($('#news_title').val()==""){
+            $('#notification').html("News Title Can Be Empty");
+            return false;
+        }
+        if($('#photo_url').val()==""){
+            $('#notification').html("Photo Must Be Uploaded");
+            return false;
+        }
+        if($('#news_content').val()==""){
+            $('#notification').html("News Content Title Can Be Empty");
+            return false;
+        }
+=======
+    function register() {
+        $('#notification').html('');
+        $.ajax({
+            type: "POST",
+            url: $('#baseUrl').val() + 'user/register',
+            data: {
+
+                first_name: $('#first_name').val(),
+                last_name: $('#last_name').val(),
+                phone: $('#phone').val(),
+                email: $('#email').val(),
+                birth_month: $("#birth_month option:selected").val(),
+                birth_day: $('#birth_day').val(),
+                birth_year: $('#birth_year').val(),
+                address: $('#address').val()
+
+
             },
             success: function (data) {
 
@@ -47,29 +109,7 @@
                 alert('Error occured');
             }
         });
-
-    }
-
-    $('#submitBtn').click(function () {
-
-        $('#category_id').val();
-
-        if($('#category').val()==""){
-            $('#notification').html("Category Can Be Empty");
-            return false;
-        }
-        if($('#news_title').val()==""){
-            $('#notification').html("News Title Can Be Empty");
-            return false;
-        }
-        if($('#photo_url').val()==""){
-            $('#notification').html("Photo Must Be Uploaded");
-            return false;
-        }
-        if($('#news_content').val()==""){
-            $('#notification').html("News Content Title Can Be Empty");
-            return false;
-        }
+>>>>>>> f929b0e67e201d748947b098e62602e067bfde13
 
       $('#formSubmit').submit();
     });

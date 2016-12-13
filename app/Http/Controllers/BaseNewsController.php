@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\coreBaseClass\ControllerErrorObj;
 use App\Http\Controllers\coreBaseClass\ServiceResponse;
 use App\Models\BaseMallBDModel;
+use App\Models\DataModel\AppCredential;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
 use View;
@@ -32,12 +33,12 @@ class BaseNewsController extends Controller{
         $this->pageData['searchVal'] ="";
         
         $this->serviceResponse = new ServiceResponse();
-       /* $this->appCredential = $this->getSession();
+        $this->appCredential = $this->getSession();
 
         $this->serviceResponse->responseStat->isLogin = ($this->appCredential->id>0)?true:false;
         $this->pageData['isLogin'] = $this->serviceResponse->responseStat->isLogin;
 
-        $this->pageData["appCredential"] = $this->appCredential;*/
+        $this->pageData["appCredential"] = $this->appCredential;
         $categorymodel=new Category();
         $this->pageData['categoryList']=$categorymodel->getAllActiveCategories();
         date_default_timezone_set("Asia/Dhaka");

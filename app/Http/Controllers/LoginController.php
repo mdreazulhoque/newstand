@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Models\LoginUser;
+use App\Models\DataModel\AppCredential;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,6 +16,10 @@ class LoginController extends BaseNewsController{
     public function loginView()
     {
         return view('user.login',$this->pageData);
+    }
+    public function adminloginView()
+    {
+        return view('admin.login',$this->pageData);
     }
 
     /**
@@ -29,6 +35,7 @@ class LoginController extends BaseNewsController{
 
         $validator = Validator::make($request->all(), array(
             'email' => 'required|email|max:255',
+            'role' => 'required',
             'password' => 'required',
         ));
 
@@ -41,6 +48,7 @@ class LoginController extends BaseNewsController{
 
         $loginUserModel = new LoginUser();
         $loginUserModel->setEmail($request->input("email"),false);
+        $loginUserModel->setRole($request->input("role"));
 
         $loginUserObj = $loginUserModel->getLoginUserByEmail();
 
@@ -69,10 +77,17 @@ class LoginController extends BaseNewsController{
         $auth = new AuthController();
 
         if($auth->authenticate($email,$password)){
+            $user  = Auth::user();
 
+            $appCredential = new AppCredential();
+            $appCredential->castMe($user);
+
+            Session::put('AppCredential', $user);
+            return $this->response();
             $this->serviceResponse->responseStat->status = true;
             $this->serviceResponse->responseStat->isLogin = true;
             $this->serviceResponse->responseStat->msg = "Login Successful";
+            
             return $this->response();
 
         }
@@ -89,10 +104,9 @@ class LoginController extends BaseNewsController{
 
     public function logout(){
         Auth::logout();
-        $this->serviceResponse->responseStat->status = true;
-        $this->serviceResponse->responseStat->msg = "Successfully logged out !";
-        return $this->response();
+        return redirect('home')->send();
 
     }
+    
 
 }
