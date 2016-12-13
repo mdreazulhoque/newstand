@@ -240,9 +240,11 @@ class News extends BaseModel {
 
     public function getMyNewBySlug(){
 
+
         $allnews = $this->with("category", "user")
                         ->whereIn("status", ["Publish","Unpublished","Pending"])
                         ->where('news_slug',$this->news_slug)
+                        ->where('created_by',$this->currentUserId)
                         ->limit($this->customLimit)
                         ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('created_at', 'desc')
