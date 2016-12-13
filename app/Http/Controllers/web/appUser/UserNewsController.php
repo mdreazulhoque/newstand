@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web\appUser;
 
 use App\Http\Controllers\BaseNewsController;
+use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -48,8 +49,7 @@ class UserNewsController extends BaseNewsController {
     }
     
     public function getNewsByCatIdView($catId) {
-
-        $newsModel = new News();        
+        $newsModel = new News();
         $newsModel->setCustomLimit(10);
         $newsModel->setCustomOffset(0);
         $newsModel->setUserCategoryId($catId); 
@@ -57,28 +57,47 @@ class UserNewsController extends BaseNewsController {
         return view('user.news_all',$this->pageData);
     }
 
+    public function createNewsView(){
+
+        $catModel=new Category();
+        $this->pageData['category']=$catModel->getAllCategories();
+
+        return view('user.create_news',$this->pageData);
+    }
 
     public function createNews(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|max:55',
-            'last_name' => 'required|max:55',
-            'phone' => 'required|max:15',
-            'birth_month' => 'required|max:2',
-            'birth_day' => 'required|max:2',
-            'birth_year' => 'required|max:4',
-            'address' => 'required|max:150',
-            'email' => 'required|email|max:255|unique:login_users',
+            'category' => 'required',
+            'news_title' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'news_content' => 'required|max:255',
         ]);
 
         if ($validator->fails()) {
+
             $this->serviceResponse->responseStat->status = false;
             $this->serviceResponse->responseStat->msg = $validator->errors()->first();
             return $this->response();
         }
 
-    }
+        $newsModel=new News();
 
+        $image = $request->file('image');
+        $imagename = time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('/img');
+        $image->move($destinationPath, $imagename);
+
+        $newsModel->setUserCategoryId($request->input('category'));
+        $newsModel->setNewsTitle($request->input('news_title'));
+        $newsModel->setPhotoUrl('img/'.$imagename);
+        $newsModel->setNewsContent($request->input('news_content'));
+        $newsModel->setNewsSlug($request->input('news_title'));
+        $newsModel->setCreatedBy();
+
+        $newsModel->saveNews();
+        
+    }
 
     //pdf download
     public function getNewsBySlugDownload($slug) {
