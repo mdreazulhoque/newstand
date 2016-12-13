@@ -50,7 +50,22 @@
 
 
 
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">account_circle</i>
+                        <span>Users</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{url('admin/app-user/all')}}">See All User</a>
+                        </li>
 
+                        <li>
+                            <a href="{{url('admin/admin-user/add-new')}}">Add New Admin</a>
+                        </li>
+
+                    </ul>
+                </li>
 
 
 

@@ -13,4 +13,14 @@ class AdminHomeController extends BaseNewsController
     {
         return view('admin.admin_home');
     }
+
+
+    //TODO User management is to be implemented...
+    /**
+     * show admin.user_management view
+     * @return \Illuminate\View\View
+     */
+    public function userManagement(){
+        return view('admin.user_management');
+    }
 }

@@ -29,7 +29,7 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$rowData->news_title}}</td>
                                     <td>{{$rowData->status}}</td>
-                                    <td><a class="btn btn-primary" href="{{url('news/'.$rowData->news_slug)}}">Details</a> <a class="btn btn-danger" href="{{url('delete_news/'.$rowData->id)}}">Delete</a></td>
+                                    <td><a class="btn btn-primary" href="{{url('mynews/'.$rowData->news_slug)}}">Details</a> <a class="btn btn-danger" href="{{url('delete_news/'.$rowData->id)}}">Delete</a></td>
                                 </tr>
                                 @endforeach
                             @endif
