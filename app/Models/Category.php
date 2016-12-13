@@ -28,7 +28,7 @@ class Category extends BaseModel
      */
     protected $table = 'categories';
 
-    /**
+    /**for setting category
      * @param mixed $category_name
      */
     public function setCategoryName($category_name, $constrains = true)
