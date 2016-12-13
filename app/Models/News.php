@@ -78,7 +78,7 @@ class News extends BaseModel {
     /**
      * @param mixed $news_slug
      */
-    public function setNewsSlug($news_slug) {
+    public function setNewsSlug($news_slug,$constrains=true) {
 
         $this->setObj($news_slug);
 
@@ -97,7 +97,7 @@ class News extends BaseModel {
         if($constrains){
             a:
             if($this->isDuplicateSlug($news_slug3)){
-                $news_slug3 = str_slug($news_slug2, "-");
+                $news_slug3 = $news_slug3."-";
                 goto a;
             }
         }
