@@ -31,7 +31,7 @@
                         <a href="">{{@\Illuminate\Support\Facades\Auth::user()->first_name}}</a>
                     </li>
                     <li>
-                        <a href="{\Illuminate\Support\Facades\URL::to('logout')}}">Logout</a>
+                        <a href="{{URL::to('logout')}}">Logout</a>
                     </li>
                 @endif
                 <li>

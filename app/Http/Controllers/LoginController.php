@@ -15,6 +15,10 @@ class LoginController extends BaseNewsController{
     {
         return view('user.login',$this->pageData);
     }
+    public function adminloginView()
+    {
+        return view('admin.login',$this->pageData);
+    }
 
     /**
      * for login
@@ -29,6 +33,7 @@ class LoginController extends BaseNewsController{
 
         $validator = Validator::make($request->all(), array(
             'email' => 'required|email|max:255',
+            'role' => 'required',
             'password' => 'required',
         ));
 
@@ -41,6 +46,7 @@ class LoginController extends BaseNewsController{
 
         $loginUserModel = new LoginUser();
         $loginUserModel->setEmail($request->input("email"),false);
+        $loginUserModel->setRole($request->input("role"));
 
         $loginUserObj = $loginUserModel->getLoginUserByEmail();
 
@@ -73,6 +79,7 @@ class LoginController extends BaseNewsController{
             $this->serviceResponse->responseStat->status = true;
             $this->serviceResponse->responseStat->isLogin = true;
             $this->serviceResponse->responseStat->msg = "Login Successful";
+            
             return $this->response();
 
         }
@@ -89,9 +96,10 @@ class LoginController extends BaseNewsController{
 
     public function logout(){
         Auth::logout();
-        $this->serviceResponse->responseStat->status = true;
-        $this->serviceResponse->responseStat->msg = "Successfully logged out !";
-        return $this->response();
+        return redirect('home')->send();
+//        $this->serviceResponse->responseStat->status = true;
+//        $this->serviceResponse->responseStat->msg = "Successfully logged out !";
+//        return $this->response();
 
     }
 

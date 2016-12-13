@@ -19,13 +19,14 @@
 <script>
 
     function login() {
-
+        $('#notification').html('');
         $.ajax({
             type: "POST",
             url: $('#baseUrl').val() + 'login',
             data: {
                 email: $('#email').val(),
-                password: $('#password').val(),
+                role: "User",
+                password: $('#password').val()
             },
             success: function (data) {
 
@@ -33,9 +34,7 @@
                 if (data.responseStat.status == true) {
 
                     $('#notification').html(data.responseStat.msg);
-                    window.setTimeout(function () {
                         window.location.href = $('#baseUrl').val() + 'home';
-                    }, 3000);
 
                 } else {
                     $('#notification').html(data.responseStat.msg);
@@ -52,7 +51,7 @@
 
 
     function register() {
-
+        $('#notification').html('');
         $.ajax({
             type: "POST",
             url: $('#baseUrl').val() + 'user/register',

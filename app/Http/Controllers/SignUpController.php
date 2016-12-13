@@ -21,7 +21,7 @@ class SignUpController extends BaseNewsController{
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|max:55',
             'last_name' => 'required|max:55',
-            'phone' => 'required|max:15',
+            'phone' => 'required|max:15|unique:users',
             'birth_month' => 'required|max:2',
             'birth_day' => 'required|max:2',
             'birth_year' => 'required|max:4',
