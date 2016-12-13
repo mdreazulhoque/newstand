@@ -220,6 +220,24 @@ class News extends BaseModel {
         return $allnews;
 
     }
+
+    public function getMyNewBySlug(){
+
+        $allnews = $this->with("category", "user")
+                        ->whereIn("status", ["Publish","Unpublished","Pending"])
+                        ->where('news_slug',$this->news_slug)
+                        ->limit($this->customLimit)
+                        ->offset($this->customLimit * $this->customOffset)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        if ($allnews == null) {
+            return null;
+        }
+
+        return $allnews;
+
+    }
     
     public function getNewBySearch($search_val){
         $allnews = $this->with("category", "user")
