@@ -70,6 +70,7 @@
             $('#notification').html("News Content Title Can Be Empty");
             return false;
         }
+    });
 
     function register() {
         $('#notification').html('');
@@ -109,7 +110,8 @@
                 alert('Error occured');
             }
         });
-        
+    }
+
     function submit_search() {
         var search_val = $('#search').val();
         if (search_val == '') {
