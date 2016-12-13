@@ -32,7 +32,8 @@ Route::get('user/login/view','LoginController@loginView');
 Route::get('admin','LoginController@adminloginView');
 Route::post('login', 'LoginController@loginAttempt');
 
-
+Route::get('resend_verification/view','EmailVerificationController@getResendVerificationView');
+Route::post('resend_verification','EmailVerificationController@sendResendVerificationLink');
 
 Route::group(['middleware' => 'AuthFilter'], function () {
 
@@ -54,6 +55,8 @@ Route::group(['middleware' => 'AuthFilter'], function () {
         Route::post('admin/news/delete/{newsId}','Web\Admin\AdminNewsController@deleteNews');
         Route::post('admin/news/publish/{newsId}','Web\Admin\AdminNewsController@publishNews');
         Route::post('admin/news/unpublish/{newsId}','Web\Admin\AdminNewsController@unpublishNews');
+        Route::get('admin/app-user/all','Web\Admin\AdminHomeController@userManagement');
+        Route::get('admin/admin-user/add-new','Web\Admin\AdminHomeController@userManagement');
     });
 });
 

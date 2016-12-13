@@ -35,7 +35,7 @@
     <hr>
 
     <!-- Preview Image -->
-    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+    <img class="img-responsive" src="{{$baseUrl}}/{{$rowData->photo_url}}" alt="">
 
     <hr>
 
