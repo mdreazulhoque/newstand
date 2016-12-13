@@ -44,4 +44,4 @@
     </div>
     <!-- /.container -->
 </nav>
-<input type="hidden" id="base_url" value="{{ url('') }}">
+<input type="hidden" id="baseUrl" value="{{url('/')}}/"/>

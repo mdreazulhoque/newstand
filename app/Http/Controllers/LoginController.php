@@ -13,7 +13,7 @@ class LoginController extends BaseNewsController{
 
     public function loginView()
     {
-        return view('user.login');
+        return view('user.login',$this->pageData);
     }
 
     /**
