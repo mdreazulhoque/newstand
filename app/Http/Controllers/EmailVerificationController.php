@@ -10,7 +10,13 @@ use Illuminate\Http\Request;
 
 
 class EmailVerificationController extends BaseNewsController{
-    
+
+    /**
+     * for verifying
+     * @param   int $id
+     * @param \Illuminate\Http\Request $request
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
     public function verifyEmail($id,Request $request){
 
         $emailVerificationModel = new EmailVerification();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\AppUser;
 
 use App\Http\Controllers\BaseNewsController;
 use App\Http\Controllers\Controller;
@@ -11,11 +11,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends BaseNewsController{
-
+    /**
+     * show set password view
+     * @return \Illuminate\View\View
+     */
     public function setPasswordView(){
         return view('user.email_verification');
     }
 
+
+    /**
+     * for setting password for user
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\view
+     */
     public function setPassword($id,Request $request){
 
         $validator = Validator::make($request->all(), [

@@ -22,9 +22,9 @@ Route::post('user/register','SignUpController@registerUser');
 
 Route::get('user/register/view','SignUpController@registrationView');
 
-Route::post('user/password/set/{id}','UserController@setPassword');
+Route::post('user/password/set/{id}','Web\AppUser\UserController@setPassword');
 
-Route::get('user/password_set/view','UserController@setPasswordView');
+Route::get('user/password_set/view','Web\AppUser\UserController@setPasswordView');
 
 Route::get('email/verify/{id}','EmailVerificationController@verifyEmail');
 

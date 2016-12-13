@@ -11,24 +11,35 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class LoginController extends BaseNewsController{
+class LoginController extends BaseNewsController
+{
 
+    /**
+     * for showing login view
+     * @return \Illuminate\View\View
+     */
     public function loginView()
     {
-        return view('user.login',$this->pageData);
-    }
-    public function adminloginView()
-    {
-        return view('admin.login',$this->pageData);
+        return view('user.login', $this->pageData);
     }
 
     /**
- * for login
- * @param  \Illuminate\Http\Request  $request
- * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
- */
+     * for showing loghin view
+     * @return \Illuminate\View\View
+     */
+    public function adminloginView()
+    {
+        return view('admin.login', $this->pageData);
+    }
 
-    public function loginAttempt(Request $request){
+    /**
+     * for login
+     * @param  \Illuminate\Http\Request $request
+     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     */
+
+    public function loginAttempt(Request $request)
+    {
 
         $email = $request->input("email");
         $password = $request->input("password");
@@ -39,35 +50,34 @@ class LoginController extends BaseNewsController{
             'password' => 'required',
         ));
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             $this->serviceResponse->responseStat->status = false;
             $this->serviceResponse->responseStat->msg = $validator->errors()->first();
             return $this->response();
         }
 
         $loginUserModel = new LoginUser();
-        $loginUserModel->setEmail($request->input("email"),false);
+        $loginUserModel->setEmail($request->input("email"), false);
         $loginUserModel->setRole($request->input("role"));
 
         $loginUserObj = $loginUserModel->getLoginUserByEmail();
 
 
-        if($loginUserObj==""){
+        if ($loginUserObj == "") {
             $this->serviceResponse->responseStat->status = false;
             $this->serviceResponse->responseStat->msg = "Email doesn't exist";
             return $this->response();
         }
 
-        if($loginUserObj->status!="Active"){
+        if ($loginUserObj->status != "Active") {
 
-            if($loginUserObj->status=="Pending"){
+            if ($loginUserObj->status == "Pending") {
                 $this->serviceResponse->responseStat->status = false;
                 $this->serviceResponse->responseStat->msg = "Sorry your email is not verified";
                 return $this->response();
             }
-            
-            if($loginUserObj->status=="Banned"){
+
+            if ($loginUserObj->status == "Banned") {
                 $this->serviceResponse->responseStat->status = false;
                 $this->serviceResponse->responseStat->msg = "Sorry your email is Banned";
                 return $this->response();
@@ -76,8 +86,8 @@ class LoginController extends BaseNewsController{
 
         $auth = new AuthController();
 
-        if($auth->authenticate($email,$password)){
-            $user  = Auth::user();
+        if ($auth->authenticate($email, $password)) {
+            $user = Auth::user();
 
             $appCredential = new AppCredential();
             $appCredential->castMe($user);
@@ -87,7 +97,7 @@ class LoginController extends BaseNewsController{
             $this->serviceResponse->responseStat->status = true;
             $this->serviceResponse->responseStat->isLogin = true;
             $this->serviceResponse->responseStat->msg = "Login Successful";
-            
+
             return $this->response();
 
         }
@@ -99,14 +109,15 @@ class LoginController extends BaseNewsController{
 
     /**
      * For Logout
-     * @return \App\Http\Controllers\coreBaseClass\ServiceResponse
+     * redirect to home page
      */
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('home')->send();
 
     }
-    
+
 
 }
