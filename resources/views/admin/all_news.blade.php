@@ -53,12 +53,12 @@
                                         <td>{{$news->news_content}}</td>
                                         <td>{{$news->user->first_name}} {{$news->user->last_name}}</td>
                                         <td>{{$news->category->category_name}}</td>
-                                        <td>{{$news->status}}</td>
+                                        <td id="status{{$news->id}}">{{$news->status}}</td>
                                         @if($news->status==$news->unpublished || $news->status==$news->pending)
-                                            <td><button id="btn{{$news->id}}"  type="button" class="btn btn-success">Publish</button></td>
+                                            <td><button id="btn{{$news->id}}" onclick="operationNews({{$news->id}})" type="button" class="btn btn-success">Publish</button></td>
 
                                         @else
-                                            <td ><button id="btn{{$news->id}}"   type="button" class="btn btn-danger">Unpublish</button></td>
+                                            <td ><button id="btn{{$news->id}}" onclick="operationNews({{$news->id}})"  type="button" class="btn btn-danger">Unpublish</button></td>
                                         @endif
 
                                         <td><button onclick="deleteNewsPost({{$news->id}})"  type="button" class="btn btn-danger">Delete</button></td>
@@ -115,16 +115,17 @@
         }
 
 
-        function activationCategory(catid) {
-            var operation=$('#btn'+catid).text();
+        function operationNews(newsId) {
+            var operation=$('#btn'+newsId).text();
             var url;
-            if (operation=='Activate'){
-                url='admin/category/activate/'+catid;
+            if (operation=='Publish'){
+                url='admin/news/publish/'+newsId;
 
-            }else if (operation=='Deactivate'){
-                url='admin/category/deactivate/'+catid;
+            }else if (operation=='Unpublish'){
+                url='admin/news/unpublish/'+newsId;
 
             }
+
 
             $.ajax({
                 type: "POST",
@@ -136,24 +137,28 @@
                     if (data.responseStat.status == true) {
 
 
-                        if (operation=='Activate'){
-                            $('#'+catid).text('Activate');
-                            $('#'+catid).css('color','green');
-                            $('#btn'+catid).text('Deactivate');
-                            $('#btn'+catid).removeClass('btn btn-success');
-                            $('#btn'+catid).addClass('btn btn-danger');
+                        if (operation=='Publish'){
+                            $('#status'+newsId).text('Publish');
+
+                            $('#status'+newsId).css('color','green');
+                            $('#btn'+newsId).text('Unpublish');
+                            $('#btn'+newsId).removeClass('btn btn-success');
+                            $('#btn'+newsId).addClass('btn btn-danger');
                             $("#alertMsg").html(data.responseStat.msg).fadeIn(500).delay(2000).fadeOut(500);
 
 
-                        }else if(operation=='Deactivate'){
-                            $('#'+catid).text('Deactivate');
-                            $('#'+catid).css('color','red');
 
-                            $('#btn'+catid).text('Activate');
-                            $('#btn'+catid).removeClass('btn btn-danger');
-                            $('#btn'+catid).addClass('btn btn-success');
+
+
+                        }else if(operation=='Unpublish'){
+                            $('#status'+newsId).text('Unpublished');
+                            $('#status'+newsId).css('color','red');
+
+                            $('#btn'+newsId).text('Publish');
+
+                            $('#btn'+newsId).removeClass('btn btn-danger');
+                            $('#btn'+newsId).addClass('btn btn-success');
                             $("#errorMessage").html(data.responseStat.msg).fadeIn(500).delay(2000).fadeOut(500);
-
 
                         }
 
