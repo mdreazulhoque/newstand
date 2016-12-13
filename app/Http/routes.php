@@ -63,6 +63,7 @@ Route::post('admin/news/unpublish/{newsId}','Web\Admin\AdminNewsController@unpub
 
 Route::get('/rss','Web\AppUser\UserNewsController@rss');
 Route::get('/news/{slug}','Web\AppUser\UserNewsController@getNewsBySlugView');
+Route::get('/news/download/{slug}','Web\AppUser\UserNewsController@getNewsBySlugDownload');
 Route::get('/news/category/{catId}','Web\AppUser\UserNewsController@getNewsByCatIdView');
 Route::get('/allnews','Web\AppUser\UserNewsController@getAllNewsView');
 Route::get('/news/search/{search_val}','Web\AppUser\UserNewsController@getNewsBySearchView');

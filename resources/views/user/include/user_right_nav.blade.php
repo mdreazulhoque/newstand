@@ -5,7 +5,7 @@
     <div class="well">
         <h4>Blog Search</h4>
         <div class="input-group">
-            <input type="text" class="form-control" value='@if(isset($searchVal)) {{$searchVal}}@endif ' name="search" onkeydown="if (event.keyCode == 13) submit_search()" id="search" placeholder='wirte and click search icon'>
+            <input type="text" class="form-control" value='{{$searchVal}}' name="search" onkeydown="if (event.keyCode == 13) submit_search()" id="search" placeholder='wirte and click search icon'>
             <span id='error' style='color: red;' ></span>
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" onclick="submit_search();">
@@ -15,17 +15,6 @@
         </div>
         <!-- /.input-group -->
     </div>
-    <script>
-        function submit_search(){
-            var search_val=$('#search').val();
-            if(search_val == ''){
-                $('#search').focus();
-                $('#error').html('Write Something For Search');
-                return false;
-            }
-            window.location.assign($('#base_url').val()+'/news/search/'+search_val);
-        }
-    </script>
 
     <!-- Blog Categories Well -->
     <div class="well">

@@ -27,7 +27,9 @@ class BaseNewsController extends Controller{
         $this->controllerErrorObj = new ControllerErrorObj();
         
         //Images URL
-        $this->pageData['baseUrl'] ="http://localhost/";       
+        $this->pageData['baseUrl'] ="http://localhost/";
+        
+        $this->pageData['searchVal'] ="";
         
         $this->serviceResponse = new ServiceResponse();
        /* $this->appCredential = $this->getSession();

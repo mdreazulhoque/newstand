@@ -2,14 +2,16 @@
 
 @section('content')
 <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=1648526795437995";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        </script>
+<script>(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=1648526795437995";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 <!-- Blog Post Content Column -->
 <div class="col-lg-8">
     @if(count($newsDetails) == 0) 
@@ -22,7 +24,7 @@
 
     <!-- Author -->
     <p class="lead">
-        by <a href="#">{{$newsDetails[0]->user->first_name}} {{$newsDetails[0]->user->last_name}}</a>
+        by <a href="#">{{$newsDetails[0]->user->first_name}} {{$newsDetails[0]->user->last_name}}</a>        
     </p>
 
     <hr>
@@ -43,9 +45,14 @@
         echo $newsDetails[0]->news_content;
         ?>
     </p>
-
+    <p>
+    <a href="{{url('/news/download/' . $newsDetails[0]->news_slug)}}">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-download"></i>
+        </span>
+        Click Here Download PDF for this 
+    </a></p>
     <hr>
-
     <!-- Blog Comments -->
 
     <!-- Comments Form -->

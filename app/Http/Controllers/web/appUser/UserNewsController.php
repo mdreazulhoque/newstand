@@ -53,7 +53,18 @@ class UserNewsController extends BaseNewsController {
         $this->pageData['newsList'] =$newsModel->getNewByCatId();
         return view('user.news_all',$this->pageData);
     }
-
+    //pdf download
+    public function getNewsBySlugDownload($slug) {
+        $newsModel = new News();        
+        $newsModel->setCustomLimit(1);
+        $newsModel->setCustomOffset(0);
+        $newsModel->setSlugWhileGet($slug); 
+        $this->pageData['newsDetails'] =$newsModel->getNewBySlug();
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('user.news_download', $this->pageData);
+        return $pdf->download('News_'.$slug.'.pdf');
+    }
+    //rss feed
     public function rss() {
         $newsModel = new News();
         $newsModel->setCustomLimit(10);
