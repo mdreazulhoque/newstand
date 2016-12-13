@@ -80,6 +80,8 @@ Route::get('/createnews','web\appUser\UserNewsController@createNewsView');
 Route::post('/newsPost','web\appUser\UserNewsController@createNews');
 Route::get('/mynews','web\appUser\UserNewsController@getNewByUserIdView');
 Route::get('/delete_news/{id}','web\appUser\UserNewsController@deleteNews');
+Route::get('/mynews/{slug}','web\appUser\UserNewsController@getNewsByMySlugView');
+
 
 
 
