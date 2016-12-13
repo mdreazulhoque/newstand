@@ -262,10 +262,8 @@ class News extends BaseModel {
         $allnews = $this->with("category", "user")
                         ->where("status", "Publish")
                         ->where('news_title','like','%'.$search_val.'%')
-                        ->limit($this->customLimit)
-                        ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('created_at', 'desc')
-                        ->get();
+                        ->paginate(10);
 
         if ($allnews == null) {
             return null;
@@ -279,10 +277,8 @@ class News extends BaseModel {
         $allnews = $this->with("category", "user")
                         ->where("status", "Publish")
                         ->where('category_id',$this->category_id)
-                        ->limit($this->customLimit)
-                        ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('created_at', 'desc')
-                        ->get();
+                        ->paginate(10);
 
         if ($allnews == null) {
             return null;

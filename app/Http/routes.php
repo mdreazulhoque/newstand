@@ -47,8 +47,8 @@ Route::group(['middleware' => 'AuthFilter'], function () {
         Route::get('/news/details/{slug}','web\appUser\UserNewsController@getNewsByMySlugView');
     });
     Route::group(['middleware' => 'AdminRole'], function () {
-        Route::get('admin/home','Web\Admin\AdminHomeController@index');
-        Route::get('admin/category/all','Web\Admin\AdminCategoryController@getllCategoryView');
+        Route::get('admin/home','web\admin\AdminHomeController@index');
+        Route::get('admin/category/all','web\wdmin\AdminCategoryController@getllCategoryView');
         Route::get('admin/category/add-new','Web\Admin\AdminCategoryController@getAddNewCategoryView');
         Route::post('admin/category/save-new-category','Web\Admin\AdminCategoryController@saveNewCategory');
         Route::post('admin/category/activate/{catId}','Web\Admin\AdminCategoryController@activateCategory');
@@ -67,17 +67,17 @@ Route::group(['middleware' => 'AuthFilter'], function () {
 
 
 
-Route::get('/','Web\AppUser\UserHomeController@index');
-Route::get('/home','Web\AppUser\UserHomeController@index');
-Route::get('/about','Web\AppUser\UserHomeController@about');
+Route::get('/','web\appUser\UserHomeController@index');
+Route::get('/home','web\appUser\UserHomeController@index');
+Route::get('/about','web\appUser\UserHomeController@about');
 
 
-Route::get('/rss','Web\AppUser\UserNewsController@rss');
+Route::get('/rss','web\appUser\UserNewsController@rss');
 
 Route::get('/news/{slug}','web\appUser\UserNewsController@getNewsBySlugView');
 Route::get('/news/download/{slug}','Web\AppUser\UserNewsController@getNewsBySlugDownload');
 
-Route::get('/news/category/{catId}','Web\AppUser\UserNewsController@getNewsByCatIdView');
+Route::get('/news/category/{catId}','web\appUser\UserNewsController@getNewsByCatIdView');
 Route::get('/news/search/{search_val}','web\appUser\UserNewsController@getNewsBySearchView');
 
 
