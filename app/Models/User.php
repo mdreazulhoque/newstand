@@ -97,7 +97,7 @@ class User extends BaseModel
      /**
      * @param mixed $phone
      */
-    public function setPhone($phone) {
+    public function setPhone($phone,$constrains=true) {
 
         $this->setObj($phone);
 
@@ -108,6 +108,15 @@ class User extends BaseModel
             $errorObj->msg = "*Phone is empty";
             array_push($this->errorManager->errorObj,$errorObj);
             return false;
+        }
+        if($constrains){
+            if($this->isDuplicatePhone($phone)){
+                $errorObj = new ErrorObj();
+                $errorObj->params = "Phone";
+                $errorObj->msg = "*Duplicate Phone found !";
+                array_push($this->errorManager->errorObj,$errorObj);
+                return false;
+            }
         }
 
         $this->phone = $this->getObj();
@@ -182,7 +191,17 @@ class User extends BaseModel
            return FALSE;
         }
     }
-
+    /**
+     * @ Check Unique $phone
+     */
+    public function isDuplicatePhone($phone){
+        $data=$this::where('phone',$phone)->first();
+        if(count($data)>0){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
     public function saveUser(){
         
         return $this->save();

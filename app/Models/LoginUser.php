@@ -178,7 +178,7 @@ class LoginUser extends BaseModel
 
     public function getLoginUserByEmail(){
 
-        return $this::where('email',$this->email)->first();
+        return $this::where('email',$this->email)->where('role',$this->role)->first();
     }
 
     public function user_detail()

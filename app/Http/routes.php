@@ -29,6 +29,7 @@ Route::get('user/password_set/view','UserController@setPasswordView');
 Route::get('email/verify/{id}','EmailVerificationController@verifyEmail');
 
 Route::get('user/login/view','LoginController@loginView');
+Route::get('admin','LoginController@adminloginView');
 Route::post('login', 'LoginController@loginAttempt');
 
 
@@ -74,6 +75,8 @@ Route::get('/news/search/{search_val}','web\appUser\UserNewsController@getNewsBy
 /// Raza Urls
 
 Route::get('/news/users/{id}','web\appUser\UserNewsController@getNewByUserIdView');
+Route::get('/postnews','web\appUser\UserNewsController@createNewsView');
+Route::post('/newsPost','web\appUser\UserNewsController@createNews');
 
 
 

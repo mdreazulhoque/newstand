@@ -19,13 +19,14 @@
 <script>
 
     function login() {
-
+        $('#notification').html('');
         $.ajax({
             type: "POST",
             url: $('#baseUrl').val() + 'login',
             data: {
                 email: $('#email').val(),
-                password: $('#password').val(),
+                role: "User",
+                password: $('#password').val()
             },
             success: function (data) {
 
@@ -33,9 +34,7 @@
                 if (data.responseStat.status == true) {
 
                     $('#notification').html(data.responseStat.msg);
-                    window.setTimeout(function () {
                         window.location.href = $('#baseUrl').val() + 'home';
-                    }, 3000);
 
                 } else {
                     $('#notification').html(data.responseStat.msg);
@@ -50,9 +49,30 @@
 
     }
 
+    $('#submitBtn').click(function () {
 
+<<<<<<< HEAD
+        $('#category_id').val();
+
+        if($('#category').val()==""){
+            $('#notification').html("Category Can Be Empty");
+            return false;
+        }
+        if($('#news_title').val()==""){
+            $('#notification').html("News Title Can Be Empty");
+            return false;
+        }
+        if($('#photo_url').val()==""){
+            $('#notification').html("Photo Must Be Uploaded");
+            return false;
+        }
+        if($('#news_content').val()==""){
+            $('#notification').html("News Content Title Can Be Empty");
+            return false;
+        }
+=======
     function register() {
-
+        $('#notification').html('');
         $.ajax({
             type: "POST",
             url: $('#baseUrl').val() + 'user/register',
@@ -89,8 +109,42 @@
                 alert('Error occured');
             }
         });
+>>>>>>> f929b0e67e201d748947b098e62602e067bfde13
 
-    }
+      $('#formSubmit').submit();
+    });
+
+//    function createNews() {
+//        $.ajax({
+//            type: "POST",
+//            url: $('#baseUrl').val() + 'newsPost',
+//            data: {
+//
+//                category_id: $('#category_id').val(),
+//                news_title: $('#news_title').val(),
+//                photo_url: $('#photo_url').val(),
+//                news_content: $('#news_content').val(),
+//            },
+//            success: function (data) {
+//
+//                if (data.responseStat.status == true) {
+//                    $('#notification').html(data.responseStat.msg);
+//                    window.setTimeout(function () {
+//                        window.location.href = $('#baseUrl').val() + 'home';
+//                    }, 3000);
+//
+//                } else {
+//                    $('#notification').html(data.responseStat.msg);
+//                }
+//
+//
+//            },
+//            error: function () {
+//                alert('Error occured');
+//            }
+//        });
+//
+//    }
 
     function submit_search() {
         var search_val = $('#search').val();
