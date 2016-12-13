@@ -28,9 +28,9 @@
             <input id="password" name="password" placeholder="Password" required="" tabindex="1" type="password">
 
             <br>
+            <span id="notification" style="color: red;"></span><br><br>
             <input class="buttom" name="submit" id="submit" tabindex="5" value="Sign me up!" type="button" onclick="adminlogin()">
         </div>
-        <div id="notification"></div>
     </div>
 </div>
 <input type="hidden" id="baseUrl" value="{{url('/')}}/"/>

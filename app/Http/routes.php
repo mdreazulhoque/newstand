@@ -22,9 +22,9 @@ Route::post('user/register','SignUpController@registerUser');
 
 Route::get('user/register/view','SignUpController@registrationView');
 
-Route::post('user/password/set/{id}','UserController@setPassword');
+Route::post('user/password/set/{id}','Web\AppUser\UserController@setPassword');
 
-Route::get('user/password_set/view','UserController@setPasswordView');
+Route::get('user/password_set/view','Web\AppUser\UserController@setPasswordView');
 
 Route::get('email/verify/{id}','EmailVerificationController@verifyEmail');
 
@@ -37,30 +37,32 @@ Route::post('login', 'LoginController@loginAttempt');
 Route::group(['middleware' => 'AuthFilter'], function () {
 
     Route::get('/logout', 'LoginController@logout');
-
+    Route::group(['middleware' => 'UserRole'], function () {
+        
+    });
     Route::group(['middleware' => 'AdminRole'], function () {
-
-        Route::post('admin/register','SignUpController@registerAdmin');
+        Route::get('admin/home','Web\Admin\AdminHomeController@index');
+        Route::get('admin/category/all','Web\Admin\AdminCategoryController@getllCategoryView');
+        Route::get('admin/category/add-new','Web\Admin\AdminCategoryController@getAddNewCategoryView');
+        Route::post('admin/category/save-new-category','Web\Admin\AdminCategoryController@saveNewCategory');
+        Route::post('admin/category/activate/{catId}','Web\Admin\AdminCategoryController@activateCategory');
+        Route::post('admin/category/deactivate/{catId}','Web\Admin\AdminCategoryController@deactivateCategory');
+        Route::post('admin/category/delete/{catId}','Web\Admin\AdminCategoryController@deleteCategory');
+        Route::get('admin/category/edit/view/{catId}','Web\Admin\AdminCategoryController@getEditCategoryView');
+        Route::post('admin/category/edit','Web\Admin\AdminCategoryController@editCategory');
+        Route::get('admin/news/get-all-news','Web\Admin\AdminNewsController@getAllNews');
+        Route::post('admin/news/delete/{newsId}','Web\Admin\AdminNewsController@deleteNews');
+        Route::post('admin/news/publish/{newsId}','Web\Admin\AdminNewsController@publishNews');
+        Route::post('admin/news/unpublish/{newsId}','Web\Admin\AdminNewsController@unpublishNews');
     });
 });
 
-Route::get('admin/home','Web\Admin\AdminHomeController@index');
+
 
 Route::get('/','Web\AppUser\UserHomeController@index');
 Route::get('/home','Web\AppUser\UserHomeController@index');
 Route::get('/about','Web\AppUser\UserHomeController@about');
-Route::get('admin/category/all','Web\Admin\AdminCategoryController@getllCategoryView');
-Route::get('admin/category/add-new','Web\Admin\AdminCategoryController@getAddNewCategoryView');
-Route::post('admin/category/save-new-category','Web\Admin\AdminCategoryController@saveNewCategory');
-Route::post('admin/category/activate/{catId}','Web\Admin\AdminCategoryController@activateCategory');
-Route::post('admin/category/deactivate/{catId}','Web\Admin\AdminCategoryController@deactivateCategory');
-Route::post('admin/category/delete/{catId}','Web\Admin\AdminCategoryController@deleteCategory');
-Route::get('admin/category/edit/view/{catId}','Web\Admin\AdminCategoryController@getEditCategoryView');
-Route::post('admin/category/edit','Web\Admin\AdminCategoryController@editCategory');
-Route::get('admin/news/get-all-news','Web\Admin\AdminNewsController@getAllNews');
-Route::post('admin/news/delete/{newsId}','Web\Admin\AdminNewsController@deleteNews');
-Route::post('admin/news/publish/{newsId}','Web\Admin\AdminNewsController@publishNews');
-Route::post('admin/news/unpublish/{newsId}','Web\Admin\AdminNewsController@unpublishNews');
+
 
 Route::get('/rss','Web\AppUser\UserNewsController@rss');
 

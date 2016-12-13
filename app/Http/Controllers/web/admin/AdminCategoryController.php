@@ -44,6 +44,7 @@ class AdminCategoryController extends BaseNewsController
 
         $catModel=new Category();
         $catModel->setCategoryName($request->input('cat_name'));
+        $catModel->setCreatedBy($this->appCredential->id);
         $this->setError($catModel->errorManager->errorObj);
 
 
@@ -81,6 +82,7 @@ class AdminCategoryController extends BaseNewsController
 
 
         $cat->setCategoryName($catName);
+        $cat->setUpdatedBy($this->appCredential->id);
         $this->setError($catModel->errorManager->errorObj);
 
 
@@ -129,6 +131,7 @@ class AdminCategoryController extends BaseNewsController
             return $this->response();
         }
         $cat->setStatus($catModel->active);
+        $cat->setUpdatedBy($this->appCredential->id);
 
 
         if ($cat->saveCategory()){
@@ -169,6 +172,7 @@ class AdminCategoryController extends BaseNewsController
         }
 
         $cat->setStatus($catModel->inactive);
+        $cat->setUpdatedBy($this->appCredential->id);
 
 
         if ($cat->saveCategory()){
@@ -198,6 +202,7 @@ class AdminCategoryController extends BaseNewsController
         $catModel=new Category();
         $catModel->setId($catId);
         $cat= $catModel->getCategoryById();
+        $cat->setUpdatedBy($this->appCredential->id);
 
         if (empty($cat)){
             $this->serviceResponse->responseStat->status = false;

@@ -38,7 +38,9 @@ class AdminNewsController extends BaseNewsController
 
         $newsModel=new News();
         $newsModel->setId($newsId);
+
         $news= $newsModel->getNewsById();
+        $news->setUpdatedBy($this->appCredential->id);
 
         if (empty($news)){
             $this->serviceResponse->responseStat->status = false;
@@ -75,6 +77,7 @@ class AdminNewsController extends BaseNewsController
         $newsModel=new News();
         $newsModel->setId($newsId);
         $news= $newsModel->getNewsById();
+        $news->setUpdatedBy($this->appCredential->id);
 
         if (empty($news)){
             $this->serviceResponse->responseStat->status = false;
@@ -82,7 +85,7 @@ class AdminNewsController extends BaseNewsController
             return $this->response();
         }
 
-        $news->setStatus($newsModel->publish);
+        $news->setStatus($newsModel->unpublished);
 
 
         if ($news->saveNews()){
@@ -118,6 +121,7 @@ class AdminNewsController extends BaseNewsController
         }
 
         $news->setStatus($newsModel->deleted);
+        $news->setUpdatedBy($this->appCredential->id);
 
 
         if ($news->saveNews()){
