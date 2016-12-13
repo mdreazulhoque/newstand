@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Tomal
- * Date: 12/4/2016
- * Time: 1:49 PM
- */
 
 namespace App\Models;
 
@@ -262,10 +256,8 @@ class News extends BaseModel {
         $allnews = $this->with("category", "user")
                         ->where("status", "Publish")
                         ->where('news_title','like','%'.$search_val.'%')
-                        ->limit($this->customLimit)
-                        ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('created_at', 'desc')
-                        ->get();
+                        ->paginate(10);
 
         if ($allnews == null) {
             return null;
@@ -279,10 +271,8 @@ class News extends BaseModel {
         $allnews = $this->with("category", "user")
                         ->where("status", "Publish")
                         ->where('category_id',$this->category_id)
-                        ->limit($this->customLimit)
-                        ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('created_at', 'desc')
-                        ->get();
+                        ->paginate(10);
 
         if ($allnews == null) {
             return null;
@@ -299,10 +289,8 @@ class News extends BaseModel {
     public function getAllPublishNews() {
         $allnews = $this->with("category", "user")
                         ->where("status", "Publish")
-                        ->limit($this->customLimit)
-                        ->offset($this->customLimit * $this->customOffset)
                         ->orderBy('created_at', 'desc')
-                        ->get();
+                        ->paginate(10);
 
         if ($allnews == null) {
             return null;
@@ -315,10 +303,8 @@ class News extends BaseModel {
         $allnews = $this->with("category", "user")
             ->whereIn("status", ["Publish","Unpublished","Pending"])
             ->where('created_by',$this->currentUserId)
-            ->limit($this->customLimit)
-            ->offset($this->customLimit * $this->customOffset)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(10);
 
         if ($allnews == null) {
             return null;

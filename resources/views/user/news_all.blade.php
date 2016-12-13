@@ -49,7 +49,8 @@
 
                         <hr>
                 @endforeach
-                @endif 
+                @endif
+                <?php echo $newsList->render(); ?>
             </div>
 
 

@@ -30,6 +30,9 @@
                     </li>
                 @else
                     <li>
+                        <a href="{{ url('/allnews') }}">All News</a>
+                    </li>
+                    <li>
                         <a href="{{ url('/mynews') }}">My News</a>
                     </li>
                     <li>
