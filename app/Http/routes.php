@@ -47,6 +47,7 @@ Route::get('admin/home','Web\Admin\AdminHomeController@index');
 
 Route::get('/','Web\AppUser\UserHomeController@index');
 Route::get('/home','Web\AppUser\UserHomeController@index');
+Route::get('/about','Web\AppUser\UserHomeController@about');
 Route::get('admin/category/all','Web\Admin\AdminCategoryController@getllCategoryView');
 Route::get('admin/category/add-new','Web\Admin\AdminCategoryController@getAddNewCategoryView');
 Route::post('admin/category/save-new-category','Web\Admin\AdminCategoryController@saveNewCategory');
@@ -59,6 +60,12 @@ Route::get('admin/news/get-all-news','Web\Admin\AdminNewsController@getAllNews')
 Route::post('admin/news/delete/{newsId}','Web\Admin\AdminNewsController@deleteNews');
 Route::post('admin/news/publish/{newsId}','Web\Admin\AdminNewsController@publishNews');
 Route::post('admin/news/unpublish/{newsId}','Web\Admin\AdminNewsController@unpublishNews');
+
+Route::get('/rss','Web\AppUser\UserNewsController@rss');
+Route::get('/news/{slug}','Web\AppUser\UserNewsController@getNewsBySlugView');
+Route::get('/news/category/{catId}','Web\AppUser\UserNewsController@getNewsByCatIdView');
+Route::get('/allnews','Web\AppUser\UserNewsController@getAllNewsView');
+Route::get('/news/search/{search_val}','Web\AppUser\UserNewsController@getNewsBySearchView');
 
 
 

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog</title>
+    <title>News Stand</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('developer/admin/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet">

@@ -203,8 +203,54 @@ class News extends BaseModel {
         return $news;
     }
 
-    public function getNewBySlug($slug){
-        return $this::where('news_slug',$this->news_slug)->get();
+    public function getNewBySlug(){
+        $allnews = $this->with("category", "user")
+                        ->where("status", "Publish")
+                        ->where('news_slug',$this->news_slug)
+                        ->limit($this->customLimit)
+                        ->offset($this->customLimit * $this->customOffset)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        if ($allnews == null) {
+            return null;
+        }
+        
+        return $allnews;
+
+    }
+    
+    public function getNewBySearch($search_val){
+        $allnews = $this->with("category", "user")
+                        ->where("status", "Publish")
+                        ->where('news_title','like','%'.$search_val.'%')
+                        ->limit($this->customLimit)
+                        ->offset($this->customLimit * $this->customOffset)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        if ($allnews == null) {
+            return null;
+        }
+        
+        return $allnews;
+
+    }
+    
+    public function getNewByCatId(){
+        $allnews = $this->with("category", "user")
+                        ->where("status", "Publish")
+                        ->where('category_id',$this->category_id)
+                        ->limit($this->customLimit)
+                        ->offset($this->customLimit * $this->customOffset)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        if ($allnews == null) {
+            return null;
+        }
+        
+        return $allnews;
 
     }
 
@@ -217,7 +263,7 @@ class News extends BaseModel {
                         ->where("status", "Publish")
                         ->limit($this->customLimit)
                         ->offset($this->customLimit * $this->customOffset)
-                        ->orderBy('id', 'desc')
+                        ->orderBy('created_at', 'desc')
                         ->get();
 
         if ($allnews == null) {

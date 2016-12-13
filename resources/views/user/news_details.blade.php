@@ -1,95 +1,68 @@
 @extends('user.user_master')
 
 @section('content')
-    <!-- Blog Post Content Column -->
-    <div class="col-lg-8">
+<div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=1648526795437995";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+<!-- Blog Post Content Column -->
+<div class="col-lg-8">
+    @if(count($newsDetails) == 0) 
+    <h1 style='margin-top: 250px;' >No post found !Please check URL</h1>
+    @else        
+    <!-- Blog Post -->
 
-        <!-- Blog Post -->
+    <!-- Title -->
+    <h1>{{$newsDetails[0]->news_title}}</h1>
 
-        <!-- Title -->
-        <h1>Blog Post Title</h1>
+    <!-- Author -->
+    <p class="lead">
+        by <a href="#">{{$newsDetails[0]->user->first_name}} {{$newsDetails[0]->user->last_name}}</a>
+    </p>
 
-        <!-- Author -->
-        <p class="lead">
-            by <a href="#">Start Bootstrap</a>
-        </p>
+    <hr>
 
-        <hr>
+    <!-- Date/Time -->
+    <p><span class="glyphicon glyphicon-time"></span> Posted on {{date( 'F d,Y   h:i A', strtotime( $newsDetails[0]->created_at ) )}}</p>
 
-        <!-- Date/Time -->
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+    <hr>
 
-        <hr>
+    <!-- Preview Image -->
+    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
 
-        <!-- Preview Image -->
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+    <hr>
 
-        <hr>
+    <!-- Post Content -->
+    <p class="lead">
+        <?php
+        echo $newsDetails[0]->news_content;
+        ?>
+    </p>
 
-        <!-- Post Content -->
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+    <hr>
 
-        <hr>
+    <!-- Blog Comments -->
 
-        <!-- Blog Comments -->
-
-        <!-- Comments Form -->
-        <div class="well">
-            <h4>Leave a Comment:</h4>
-            <form role="form">
-                <div class="form-group">
-                    <textarea class="form-control" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-
-        <hr>
-
-        <!-- Posted Comments -->
-
-        <!-- Comment -->
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
-                    <small>August 25, 2014 at 9:30 PM</small>
-                </h4>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-        </div>
-
-        <!-- Comment -->
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
-                    <small>August 25, 2014 at 9:30 PM</small>
-                </h4>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                <!-- Nested Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Nested Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-                <!-- End Nested Comment -->
-            </div>
-        </div>
-
+    <!-- Comments Form -->
+    <div class="well">
+        <h4>Leave a Comment:</h4>
     </div>
-    @endsection
+
+    <hr>
+
+    <!-- Posted Comments -->
+
+    <!-- Comment -->
+    <div class="media">
+        <div class="fb-comments" data-href="{{url('/news/' . $newsDetails[0]->news_slug)}}" data-numposts="5"></div>
+    </div>
+    @endif 
+
+
+</div>
+@endsection

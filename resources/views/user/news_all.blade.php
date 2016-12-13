@@ -1,21 +1,10 @@
 @extends('user.user_master')
 
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image:url( {{asset('developer/pic/home-bg.jpg')}})">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>News Stand</h1>
-                        <hr class="small">
-                        <span class="subheading">A news portal by news Stand</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
 
+@section('content')
+
+
+            
 @section('content')
 
             
@@ -26,7 +15,7 @@
                 </h1>
             <!-- Blog Entries Column -->
             @if(count($newsList) == 0) 
-            <h1 style='margin-top: 250px;' >No post found !Please check URL</h1>
+            <h1 style='margin-top: 250px;' >No post found !Please Another One</h1>
             @else 
 
                 
@@ -62,6 +51,7 @@
                 @endforeach
                 @endif 
             </div>
+
 
 
 

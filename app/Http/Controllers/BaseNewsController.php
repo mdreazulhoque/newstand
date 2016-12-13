@@ -38,9 +38,10 @@ class BaseNewsController extends Controller{
         $this->pageData["appCredential"] = $this->appCredential;*/
         $categorymodel=new Category();
         $this->pageData['categoryList']=$categorymodel->getAllActiveCategories();
-        
+        date_default_timezone_set("Asia/Dhaka");
 
     }
+    
     public function response(){
         if($this->serviceResponse->responseStat->status!=false){
             $this->serviceResponse->responseStat->status=!($this->hasError());

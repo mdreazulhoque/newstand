@@ -7,10 +7,13 @@ class UserHomeController extends BaseNewsController
 {
 
     public function index(){        
-        $newsmodel=new News();        
-        $newsmodel->setCustomLimit(10);
-        $newsmodel->setCustomOffset(1);
-        $this->pageData['newsList']=$newsmodel->getAllPublishNews();
+        $newsModel=new News();        
+        $newsModel->setCustomLimit(10);
+        $newsModel->setCustomOffset(0);
+        $this->pageData['newsList']=$newsModel->getAllPublishNews();
         return view('user.user_home',$this->pageData);
+    }
+    public function about(){
+        return view('user.about',$this->pageData);
     }
 }

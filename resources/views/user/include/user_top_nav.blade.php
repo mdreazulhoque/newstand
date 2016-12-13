@@ -7,7 +7,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="{{ url('') }}">News Stand</a>
+            <a class="navbar-brand" style='font-weight: bold;    font-size: 40px;' href="{{ url('') }}">News Stand</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,14 +17,8 @@
                     <a href="{{ url('') }}">Home</a>
                 </li>
                  <li>
-                    <a href="{{ url('/allposts') }}">All News</a>
-                </li>
-                <li>
-                    <a href="{{ url('/about') }}">About</a>
-                </li>               
-                <li>
-                    <a href="{{ url('/contact') }}">Contact</a>
-                </li>
+                    <a href="{{ url('/allnews') }}">All News</a>
+                </li>                
                 @if(!\Illuminate\Support\Facades\Auth::check())
                     <li>
                         <a href="{{\Illuminate\Support\Facades\URL::to('user/login/view')}}">Login</a>
@@ -36,7 +30,13 @@
                     <li>
                         <a href="">{{@\Illuminate\Support\Facades\Auth::user()->first_name}}</a>
                     </li>
+                    <li>
+                        <a href="{\Illuminate\Support\Facades\URL::to('logout')}}">Logout</a>
+                    </li>
                 @endif
+                <li>
+                    <a href="{{ url('/about') }}">About Us</a>
+                </li> 
             </ul>
             <div> </div>
         </div>
@@ -44,3 +44,4 @@
     </div>
     <!-- /.container -->
 </nav>
+<input type="hidden" id="base_url" value="{{ url('') }}">

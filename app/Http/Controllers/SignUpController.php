@@ -13,7 +13,7 @@ class SignUpController extends BaseNewsController{
 
 
     public function registrationView(){
-        return view('user.registration');
+        return view('user.registration',$this->pageData);
     }
 
     public function registerUser(Request $request){
