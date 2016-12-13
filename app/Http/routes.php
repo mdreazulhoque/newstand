@@ -22,9 +22,9 @@ Route::post('user/register','SignUpController@registerUser');
 
 Route::get('user/register/view','SignUpController@registrationView');
 
-Route::post('user/password/set/{id}','Web\AppUser\UserController@setPassword');
+Route::post('user/password/set/{id}','web\AppUser\UserController@setPassword');
 
-Route::get('user/password_set/view','Web\AppUser\UserController@setPasswordView');
+Route::get('user/password_set/view','web\AppUser\UserController@setPasswordView');
 
 Route::get('email/verify/{id}','EmailVerificationController@verifyEmail');
 
@@ -48,20 +48,20 @@ Route::group(['middleware' => 'AuthFilter'], function () {
     });
     Route::group(['middleware' => 'AdminRole'], function () {
         Route::get('admin/home','web\admin\AdminHomeController@index');
-        Route::get('admin/category/all','web\wdmin\AdminCategoryController@getllCategoryView');
-        Route::get('admin/category/add-new','Web\Admin\AdminCategoryController@getAddNewCategoryView');
-        Route::post('admin/category/save-new-category','Web\Admin\AdminCategoryController@saveNewCategory');
-        Route::post('admin/category/activate/{catId}','Web\Admin\AdminCategoryController@activateCategory');
-        Route::post('admin/category/deactivate/{catId}','Web\Admin\AdminCategoryController@deactivateCategory');
-        Route::post('admin/category/delete/{catId}','Web\Admin\AdminCategoryController@deleteCategory');
-        Route::get('admin/category/edit/view/{catId}','Web\Admin\AdminCategoryController@getEditCategoryView');
-        Route::post('admin/category/edit','Web\Admin\AdminCategoryController@editCategory');
-        Route::get('admin/news/get-all-news','Web\Admin\AdminNewsController@getAllNews');
-        Route::post('admin/news/delete/{newsId}','Web\Admin\AdminNewsController@deleteNews');
-        Route::post('admin/news/publish/{newsId}','Web\Admin\AdminNewsController@publishNews');
-        Route::post('admin/news/unpublish/{newsId}','Web\Admin\AdminNewsController@unpublishNews');
-        Route::get('admin/app-user/all','Web\Admin\AdminHomeController@userManagement');
-        Route::get('admin/admin-user/add-new','Web\Admin\AdminHomeController@userManagement');
+        Route::get('admin/category/all','web\admin\AdminCategoryController@getllCategoryView');
+        Route::get('admin/category/add-new','web\Admin\AdminCategoryController@getAddNewCategoryView');
+        Route::post('admin/category/save-new-category','web\Admin\AdminCategoryController@saveNewCategory');
+        Route::post('admin/category/activate/{catId}','web\Admin\AdminCategoryController@activateCategory');
+        Route::post('admin/category/deactivate/{catId}','web\Admin\AdminCategoryController@deactivateCategory');
+        Route::post('admin/category/delete/{catId}','web\Admin\AdminCategoryController@deleteCategory');
+        Route::get('admin/category/edit/view/{catId}','web\Admin\AdminCategoryController@getEditCategoryView');
+        Route::post('admin/category/edit','web\Admin\AdminCategoryController@editCategory');
+        Route::get('admin/news/get-all-news','web\Admin\AdminNewsController@getAllNews');
+        Route::post('admin/news/delete/{newsId}','web\Admin\AdminNewsController@deleteNews');
+        Route::post('admin/news/publish/{newsId}','web\Admin\AdminNewsController@publishNews');
+        Route::post('admin/news/unpublish/{newsId}','web\Admin\AdminNewsController@unpublishNews');
+        Route::get('admin/app-user/all','web\Admin\AdminHomeController@userManagement');
+        Route::get('admin/admin-user/add-new','web\Admin\AdminHomeController@userManagement');
     });
 });
 
@@ -75,7 +75,7 @@ Route::get('/about','web\appUser\UserHomeController@about');
 Route::get('/rss','web\appUser\UserNewsController@rss');
 
 Route::get('/news/{slug}','web\appUser\UserNewsController@getNewsBySlugView');
-Route::get('/news/download/{slug}','Web\AppUser\UserNewsController@getNewsBySlugDownload');
+Route::get('/news/download/{slug}','web\AppUser\UserNewsController@getNewsBySlugDownload');
 
 Route::get('/news/category/{catId}','web\appUser\UserNewsController@getNewsByCatIdView');
 Route::get('/news/search/{search_val}','web\appUser\UserNewsController@getNewsBySearchView');
