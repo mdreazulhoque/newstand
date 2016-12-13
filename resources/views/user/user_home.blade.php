@@ -40,7 +40,7 @@
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> Posted on {{date( 'F d,Y   h:i A', strtotime( $rowData->created_at ) )}} </p>
                         <hr>
-                        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                        <img class="img-responsive" src="{{$baseUrl}}/{{$rowData->photo_url}}" alt="">
                         <hr>                        
                         <p>
                         <?php

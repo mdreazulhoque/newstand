@@ -137,4 +137,9 @@ class EmailVerification extends BaseModel
         return $this::find($this->id);
     }
     
+    public function getByLoginUserId() {
+        $emailVerificationObj = $this->where("login_user_id",$this->login_user_id)->first();
+        return $emailVerificationObj;
+    }
+    
 }

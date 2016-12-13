@@ -94,9 +94,26 @@ class News extends BaseModel {
         $news_slug2 = str_replace('/', '', $news_slug1);
         $news_slug3 = str_slug($news_slug2, "-");
 
-
+        if($constrains){
+            a:
+            if($this->isDuplicateSlug($news_slug3)){
+                $news_slug3 = str_slug($news_slug2, "-");
+                goto a;
+            }
+        }
         $this->news_slug = $news_slug3;
         return TRUE;
+    }
+    /**
+     * @ Check Unique $news_slug
+     */
+    public function isDuplicateSlug($news_slug){
+        $data=$this::where('news_slug',$news_slug)->first();
+        if(count($data)>0){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
     }
 
     /**

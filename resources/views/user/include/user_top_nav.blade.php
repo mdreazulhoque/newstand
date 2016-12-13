@@ -16,13 +16,12 @@
                 <li>
                     <a href="{{ url('') }}">Home</a>
                 </li>
-                 <li>
-                    <a href="{{ url('/allnews') }}">All News</a>
-                </li>                
+                                 
                 <li>
                     <a href="{{ url('/about') }}">About Us</a>
                 </li>
                 @if(!\Illuminate\Support\Facades\Auth::check())
+                    
                     <li>
                         <a href="{{\Illuminate\Support\Facades\URL::to('user/login/view')}}">Login</a>
                     </li>
@@ -30,6 +29,12 @@
                         <a href="{{\Illuminate\Support\Facades\URL::to('user/register/view')}}">Register</a>
                     </li>
                 @else
+                    <li>
+                        <a href="{{ url('/mynews') }}">My News</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/createnews') }}">Create News</a>
+                    </li>
                     <li>
                         <a href="">{{@\Illuminate\Support\Facades\Auth::user()->email}}</a>
                     </li>
