@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
                 'first_name' => 'riyad',
                 'last_name' => 'sikder',
                 'phone' => '01716160035',
-                'email' => 'riyad.csesust@gmail.com',
+                'email' => 'admin@newsstand.com',
                 'dob' => '1998-03-01',
                 'address' => 'Dhaka,bangladesh',
                 'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),

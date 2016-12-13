@@ -38,7 +38,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                             <select class="form-control" id="birth_month" name="birth_month">
-                                <option value="">Birth Month</option>
+                                <option value="">Select Birth Month</option>
                                 <option  value="01">January</option>
                                 <option value="02">February</option>
                                 <option value="03" >March</option>
@@ -52,8 +52,18 @@
                                 <option value="11">November</option>
                                 <option value="12" >December</option>
                         </select>
-                        <input class="form-control" maxlength="2" id="birth_day" name="birth_day"  placeholder="Birth Day " required="">
-                        <input class="form-control" maxlength="4" id="birth_year" name="birth_year" placeholder="Birth Year" required="">
+                        <select class="form-control" id="birth_day" name="birth_day" >
+                                <option value="">Select Birth Day</option>
+                                @for($i=1;$i<32;$i++)
+                                <option  value="<?php if($i>10){ echo '0'.$i;} else{ echo $i;} ?>"><?php if($i>10){ echo '0'.$i;} else{ echo $i;} ?></option>                                
+                                @endfor
+                        </select>
+                        <select class="form-control" id="birth_year" name="birth_year">
+                                <option value="">Select Birth Year</option>
+                                @for($i=1960;$i<2017;$i++)
+                                <option  value="{{$i}}">{{$i}}</option>                                
+                                @endfor
+                        </select>
                     </div>
                 </div>    
                 <div class="form-group">

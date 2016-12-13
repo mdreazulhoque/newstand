@@ -25,19 +25,19 @@ class UsersLoginTableSeeder extends Seeder
         DB::table('login_users')->insert(
             array(
                 array(
-                    'role' => 'Admin',
+                    'role' => 'User',
                     'user_id' => $user_id_admin,
                     'email' => 'riyad.cse05@gmail.com',
-                    'password' => Hash::make('123456123'),
+                    'password' => bcrypt('newsstand2016'),
                     'status' => 'Active',
                     'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s')
                 ),
                 array(
-                'role' => 'User',
+                'role' => 'Admin',
                 'user_id' => $user_id_user,
-                'email' => 'riyad.csesust@gmail.com',
-                'password' => Hash::make('6589745896'),
+                'email' => 'admin@newsstand.com',
+                'password' => bcrypt('newsstand2016'),
                 'status' => 'Active',
                 'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s')

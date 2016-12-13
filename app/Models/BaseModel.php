@@ -2,12 +2,7 @@
 namespace App\Models;
 use Exception;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-/**
- * Created by PhpStorm.
- * User: Tomal
- * Date: 12/4/2016
- * Time: 1:21 PM
- */
+
 class BaseModel extends Eloquent
 {
     public $errorManager;
