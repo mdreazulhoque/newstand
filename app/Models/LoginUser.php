@@ -14,7 +14,9 @@ class LoginUser extends BaseModel
     protected $table = 'login_users';
     protected $hidden = array('password','remember_token');
     /**
+     * setter for role
      * @param mixed $role
+     * @return boolean
      */
     public function setRole($role) {        
         $this->setObj($role);
@@ -31,7 +33,9 @@ class LoginUser extends BaseModel
         return true;
     }
     /**
+     * setter for user id
      * @param mixed $user_id
+     * @return boolean
      */
     public function setUserId($user_id) {
         $this->setObj($user_id);
@@ -49,7 +53,9 @@ class LoginUser extends BaseModel
     }
 
     /**
+     * setter for email
      * @param mixed $email
+     * @return boolean
      */
     public function setEmail($email,$constrains=true) {
 
@@ -86,7 +92,9 @@ class LoginUser extends BaseModel
         return TRUE;
     }
     /**
+     * password setter using bcrypt
      * @param mixed $password
+     * @return boolean
      */
     public function setPassword($password) {
 
@@ -105,7 +113,9 @@ class LoginUser extends BaseModel
     }
     
     /**
+     * status setter
      * @param mixed $status
+     * @return boolean
      */
     public function setStatus($status) {        
         $this->status = $status;
@@ -115,7 +125,9 @@ class LoginUser extends BaseModel
 
     
     /**
+     * setter created by
      * @param mixed $created_by
+     * @return boolean
      */
     public function setCreatedBy($created_by) {
        
@@ -124,7 +136,9 @@ class LoginUser extends BaseModel
     }
     
     /**
+     * setter for remember token
      * @param mixed $remember_token
+     * @return boolean
      */
     public function setRememberToken($remember_token) {
         $this->remember_token = $remember_token;
@@ -132,7 +146,9 @@ class LoginUser extends BaseModel
     }
 
     /**
+     * setter for updated by
      * @param mixed $updated_by
+     * @return boolean
      */
     public function setUpdatedBy($updated_by) {
         $this->updated_by = $updated_by;
@@ -151,12 +167,22 @@ class LoginUser extends BaseModel
            return FALSE;
         }
     }
-    
+
+    /**
+     * create or update Login infromation of user
+     *
+     * @return boolean
+     */
     public function saveLoginUser(){
         
         return $this->save();
     }
-    
+
+    /**
+     * getter for user(All)
+     *
+     * @return LoginUser list
+     */
     public function getAllLoginUsers(){
         $users=$this->All();
 
@@ -165,17 +191,27 @@ class LoginUser extends BaseModel
 
         return $users;
     }
-    
-    
+
+    /**
+     * getter for user(All)
+     *
+     * @return LoginUser list
+     */
     public function getLoginUserById(){
         return $this::where('id',$this->id)->with("user_detail")->first();
     }
-
+    /**
+     * getter for user(All)
+     *
+     * @return LoginUser list
+     */
     public function getLoginUserByEmail(){
 
         return $this::where('email',$this->email)->where('role',$this->role)->first();
     }
-
+    /**
+     * one to one relation with LoginUser table to User table
+     */
     public function user_detail()
     {
         return $this->hasOne("App\Models\User","id","user_id");

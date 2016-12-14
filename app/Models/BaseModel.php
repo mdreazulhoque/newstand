@@ -32,21 +32,41 @@ class BaseModel extends Eloquent
         $this->customLimit = -1;
         $this->customOffset = -1;
     }
-
+    /**
+     * set id of any table row
+     * @param $id
+     *
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
+
+    /**
+     * set logged in user id
+     * @param $currentUserId
+     *
+     */
     public function setCurrentUserId($currentUserId){
         $this->currentUserId = $currentUserId;
     }
 
+
+    /**
+     * setter for custom order for fetching data
+     */
     public function setCustomOrderAsc()
     {
         $this->customOrder = "asc";
     }
 
+
+    /**
+     * setter for custom limit
+     * @param $customLimit
+     * @return boolean
+     */
     public function setCustomLimit($customLimit){
         $customLimitInt = 1;
         try{
@@ -66,6 +86,11 @@ class BaseModel extends Eloquent
         return true;
     }
 
+    /**
+     * setter for custom offset
+     * @param $customLimit
+     * @return boolean
+     */
     public function setCustomOffset($offset){
         try{
             if($offset<0){
@@ -122,9 +147,7 @@ class ErrorManager{
     public $errorObj;
 
     /**
-     * ErrorManager constructor.
-     * @param $msg
-     * @param $status
+     * ErrorManager constructor.initialize error object
      */
     public function __construct(){
         $this->errorObj = [];

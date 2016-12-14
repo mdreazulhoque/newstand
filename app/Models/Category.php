@@ -7,7 +7,7 @@ class Category extends BaseModel
 {
 
     /**
-     * The variables are enum values for status column for this table.
+     * @The variables are enum values for status column for this table.
      *
      * @var string
      */
@@ -16,14 +16,18 @@ class Category extends BaseModel
     public $deleted = "Deleted";
 
     /**
-     * The table associated with the model.
+     * @The table associated with the model.
      *
      * @var string
      */
     protected $table = 'categories';
 
     /**
+     * @for setting category
      * @param mixed $category_name
+     * @param $category_name
+     * @param $constrains=true
+     * @return boolean
      */
     public function setCategoryName($category_name, $constrains = true)
     {
@@ -52,6 +56,10 @@ class Category extends BaseModel
 
     /**
      * @ Check Unique $email
+     * @param mixed $category_name
+     * @param $category_name
+     *
+     * @return boolean
      */
     public function isDuplicateCategoryName($category_name)
     {
@@ -64,7 +72,11 @@ class Category extends BaseModel
     }
 
     /**
-     * @param mixed $status
+     * set status
+     * @param mixed $category_name
+     * @param $status
+     *
+     * @return boolean
      */
     public function setStatus($status)
     {
@@ -73,7 +85,10 @@ class Category extends BaseModel
     }
 
     /**
+     * set created by
      * @param mixed $created_by
+     *
+     * @return boolean
      */
     public function setCreatedBy($created_by)
     {
@@ -91,8 +106,10 @@ class Category extends BaseModel
         return true;
     }
 
-    /**
+    /**set updated by
      * @param mixed $updated_by
+     *
+     * @return boolean
      */
     public function setUpdatedBy($updated_by)
     {
@@ -100,27 +117,47 @@ class Category extends BaseModel
         return true;
     }
 
-
+    /**
+     * create new or update category
+     *
+     * @return boolean
+     */
     public function saveCategory()
     {
         return $this->save();
     }
 
+    /**
+     * get all category
+     *
+     * @return Category list
+     */
     public function getAllCategories()
     {
-        $users = $this->All();
+        $categories = $this->All();
 
-        if ($users == null)
+        if ($categories == null)
             return null;
 
-        return $users;
+        return $categories;
     }
 
+    /**
+     * get category by ID
+     *
+     * @return Category
+     */
     public function getCategoryById()
     {
         return $this::find($this->id);
     }
 
+
+    /**
+     * get all Activated category
+     *
+     * @return Category
+     */
     public function getAllActiveCategories()
     {
         $allcategories = $this::where("status", "Active")
@@ -133,10 +170,6 @@ class Category extends BaseModel
         return $allcategories;
     }
 
-    public function updateCategory($data)
-    {
-        return $data->save();
 
-    }
 
 }
