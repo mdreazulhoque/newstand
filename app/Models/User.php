@@ -16,7 +16,9 @@ class User extends BaseModel
     
 
     /**
+     * setter for first name
      * @param mixed $first_name
+     * @return boolean
      */
     public function setFirstName($first_name) {
         $this->setObj($first_name);
@@ -34,7 +36,9 @@ class User extends BaseModel
     }
     
     /**
+     * setter for last name
      * @param mixed $last_name
+     * @return boolean
      */
     public function setLastName($last_name) {
         $this->setObj($last_name);
@@ -52,7 +56,9 @@ class User extends BaseModel
     }
     
     /**
+     * setter fot email
      * @param mixed $email
+     * @return boolean
      */
     public function setEmail($email,$constrains=true) {
 
@@ -90,7 +96,9 @@ class User extends BaseModel
     }
 
      /**
+      * setter for phone
      * @param mixed $phone
+      * @return boolean
      */
     public function setPhone($phone,$constrains=true) {
 
@@ -118,7 +126,9 @@ class User extends BaseModel
         return true;
     }
      /**
+      * setter DOB
      * @param mixed $dob
+      * @return boolean
      */
     public function setDOB($dob) {
 
@@ -137,7 +147,9 @@ class User extends BaseModel
         return true;
     }
     /**
+     * setter Address
      * @param mixed $address
+     * @return boolean
      */
     public function setAddress($address) {
 
@@ -159,7 +171,9 @@ class User extends BaseModel
 
     
     /**
+     * setter created by
      * @param mixed $created_by
+     * @return boolean
      */
     public function setCreatedBy($created_by) {
         
@@ -168,7 +182,9 @@ class User extends BaseModel
     }
     
     /**
+     * setter updated by
      * @param mixed $updated_by
+     * @return boolean
      */
     public function setUpdatedBy($updated_by) {      
         $this->updated_by = $updated_by;
@@ -197,11 +213,20 @@ class User extends BaseModel
            return FALSE;
         }
     }
+
+    /**
+     * create or updare user info
+     * @return boolean
+     */
     public function saveUser(){
         
         return $this->save();
     }
-    
+
+    /**
+     * getter for user
+     * @return User
+     */
     public function getAllUsers(){
         $users=$this->All();
 
@@ -210,9 +235,12 @@ class User extends BaseModel
 
         return $users;
     }
-    
-    
-    
+
+
+    /**
+     * getter for user
+     * @return User
+     */
     public function getUserById(){
         return $this::find($this->id);
     }
