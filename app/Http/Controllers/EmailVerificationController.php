@@ -110,7 +110,7 @@ class EmailVerificationController extends BaseNewsController{
         $emailVerificationObj = $emailVerificationModel->getByLoginUserId();
         
         $emailVerificationObj->setExpireDate(date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +1 day')));
-        
+        $emailVerificationObj->setStatus("Incomplete");
         if($emailVerificationObj->saveEmailVerification()){
             
           $to = $request->input("email");

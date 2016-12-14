@@ -55,7 +55,7 @@
                         <select class="form-control" id="birth_day" name="birth_day" >
                                 <option value="">Select Birth Day</option>
                                 @for($i=1;$i<32;$i++)
-                                <option  value="<?php if($i>10){ echo '0'.$i;} else{ echo $i;} ?>"><?php if($i>10){ echo '0'.$i;} else{ echo $i;} ?></option>                                
+                                <option  value="<?php if($i<10){ echo '0'.$i;} else{ echo $i;} ?>"><?php if($i<10){ echo '0'.$i;} else{ echo $i;} ?></option>                                
                                 @endfor
                         </select>
                         <select class="form-control" id="birth_year" name="birth_year">

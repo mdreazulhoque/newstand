@@ -18,7 +18,7 @@ class UsersLoginTableSeeder extends Seeder
             ->id;
         $user_id_user = DB::table('users')
             ->select('id')
-            ->where('email', 'riyad.csesust@gmail.com')
+            ->where('email', 'admin@newsstand.com')
             ->first()
             ->id;
 

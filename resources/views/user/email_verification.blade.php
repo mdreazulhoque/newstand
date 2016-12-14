@@ -37,7 +37,7 @@
             <input id="confirm_password" name="password" placeholder="Confirm Password" required="" tabindex="1" type="password">
 
             <br>
-            <input class="buttom" name="submit" id="submit" tabindex="5" value="Sign me up!" type="button" onclick="login()">
+            <input class="buttom" name="submit" id="submit" tabindex="5" value="Sign me up!" type="button" onclick="setPassword()">
         </div>
         <div id="notification"></div>
     </div>
@@ -48,7 +48,7 @@
 
 <script>
 
-    function login() {
+    function setPassword() {
 
         if($('#token').val() ==""){
             $('#notification').html("Go back to your verification link and try again!");
@@ -71,9 +71,7 @@
                 if (data.responseStat.status == true) {
 
                     $('#notification').html(data.responseStat.msg);
-                    window.setTimeout(function() {
-                        window.location.href = $('#baseUrl').val() + 'user/login/view';
-                    }, 3000);
+                    window.location.href = $('#baseUrl').val() + 'user/login/view';
 
                 } else {
                     $('#notification').html(data.responseStat.msg);

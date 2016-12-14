@@ -120,6 +120,14 @@ class EmailVerification extends BaseModel
     
     public function getByToken(){
 
+        $emailVerificationObj = $this->where("token",$this->token)->where("status","Incomplete")->first();
+
+        return $emailVerificationObj;
+
+
+    }
+    public function getByOnlyToken(){
+
         $emailVerificationObj = $this->where("token",$this->token)->first();
 
         return $emailVerificationObj;

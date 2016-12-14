@@ -42,7 +42,7 @@ class UserController extends BaseNewsController{
 
         $emailVerificationModel->setToken($id);
 
-        $emailVerificationObj = $emailVerificationModel->getByToken();
+        $emailVerificationObj = $emailVerificationModel->getByOnlyToken();
 
         if($emailVerificationObj ==""){
 
